@@ -22,3 +22,4 @@ class BASE:
     
     def segment_sentence(self):
         raise NotImplementedError
+

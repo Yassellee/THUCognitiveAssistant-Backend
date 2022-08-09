@@ -1,0 +1,22 @@
+<html>
+<head>
+    <title>Demo</title>
+</head>
+<body>
+    <div id="container">
+        <header>
+            <h1>Demo</h1>
+        </header>
+    </div>
+    <form method="POST" action="result_web/">{% csrf_token %}
+        <p>请输入你想要做的事情
+        <input type="text" name="sentence"><br></p>
+        <p>请输入你的用户名
+        <input type="text" name="userid"><br></p>
+        <p></p>
+        <input type="hidden" name="new">
+    <input type="submit" value="Submit">
+</form>
+    </body>
+</html>
+

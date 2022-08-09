@@ -1,5 +1,8 @@
+import os, sys
+basedir = os.path.abspath(os.path.dirname(__file__))
+os.chdir(basedir)
+sys.path.append(basedir)
 from BASE_strategy import BASE
-import sys
 sys.path.append("..\..")
 from configuration import Config
 from msrest.authentication import CognitiveServicesCredentials
@@ -94,4 +97,10 @@ class LUIS(BASE):
         """
         seg_list = jieba.cut(self.input_sentence, cut_all=True)
         return list(seg_list)
-        
+
+
+# test = LUIS("我要预定八月一日综体的羽毛球馆")
+# test.predict()
+# print(test.recognize_intent())
+# print(test.extract_entity())
+# print(test.segment_sentence())

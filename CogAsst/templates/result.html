@@ -1,0 +1,44 @@
+<html>
+<head>
+    <title>Demo</title>
+</head>
+<body>
+    <div id="container">
+        <header>
+            <h1>Demo</h1>
+        </header>
+    </div>
+    <p> 用户id : {{id}}<br>
+        用户输入 : {{message}}<br>
+        {% if result is not "" %}
+        识别结果 : {{result}}<br>
+        {% endif %}
+        {% if intent is not "" %}
+        识别意图 : {{intent}}<br>
+        {% endif %}
+         {% if preparedParams is not "" %}
+         识别输出:{{preparedParams}}<br>
+         {% endif %}
+        </p>
+    {% if result is not "finish" and result is not "error" and result is not "failed" %}
+    <form method="POST" action="/result_web/">{% csrf_token %}
+        <p>{{sentence}} :
+            {% if candidateParams is not "" %}
+                <br>
+                候选序列:{{candidateParams}}<br>
+            {% endif %}
+            {% if listParams is not "" %}
+                参数列表:{{listParams}}<br>
+            {% endif %}
+            <input type="text" name="sentence">
+            <input type="hidden" name="userid" value={{id}}></p>
+        <p></p>
+    <input type="submit" value="Submit">
+    </form>
+    {% endif %}
+    {% if result is "finish" or result is "error" or result is "failed" %}
+    <a href="/"><input type="button" value='返回'></a>
+    {% endif %}
+    </body>
+</html>
+
