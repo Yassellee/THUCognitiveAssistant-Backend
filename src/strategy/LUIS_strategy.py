@@ -1,5 +1,5 @@
 from BASE_strategy import BASE
-import sys
+import sys, json
 sys.path.append("..\..")
 from configuration import Config
 from msrest.authentication import CognitiveServicesCredentials
@@ -26,7 +26,7 @@ class LUIS(BASE):
         """
         prediction_request = {"query": self.input_sentence}
 
-        self.prediction_response = self.client_runtime.prediction.get_slot_prediction(self.config.app_id, "Production", prediction_request)
+        self.prediction_response = self.client_runtime.prediction.get_slot_prediction(self.config.app_id, "Production", prediction_request, show_all_intents=True)
 
     
     def recognize_intent(self):
@@ -36,19 +36,17 @@ class LUIS(BASE):
             dict: a dict in the following format
             {
             "top_intent": <name of the intent that has the highest confidence score>,
-            "intents": {
-                <Intent1>: {
-                    "score": <score of intent1>
-                },
-                <Intent2>: {
-                    "score": <score of intent2>
-                },
-                ......(intents are ranked by their scores, from high to low)
-            }
+            "intents": [<Intent1>, <Intent2>], alist of intents ranked by their confidence scores
         """
+        
+
+        list_of_intents = []
+
+        for intent in self.prediction_response.prediction.intents:
+            list_of_intents.append(intent)
 
         return {"top_intent": self.prediction_response.prediction.top_intent,
-                "intents": self.prediction_response.prediction.intents}
+                "intents": list_of_intents}
     
 
     def extract_entity(self):
