@@ -88,8 +88,13 @@ class LUIS(BASE):
         """segment user's input sentence
 
         Returns:
-            list: a list of all possible word segmented from user's input
+            dict: a dict of words with their location segmented from user's input in the following format
+            {<word>: [<start_location>, <end_location>]}
         """
-        seg_list = jieba.cut(self.input_sentence, cut_all=True)
-        return list(seg_list)
+        word_location = {}
+        result = jieba.tokenize(self.input_sentence)
+        for token in result:
+            word_location[token[0]] = [token[1], token[2]]
+        
+        return word_location
         
