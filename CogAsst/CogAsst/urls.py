@@ -8,6 +8,6 @@ urlpatterns = [
     # path('result_web/', view.result_web),
     # path('result/', view.result),
     path('get_intentlist/', view.get_intentlist),
-    path('get_intentParam/', view.get_intentParam)
-
+    path('get_intentParam/', view.get_intentParam),
+    path('get_inputTokenize', view.get_inputTokenize)
 ]

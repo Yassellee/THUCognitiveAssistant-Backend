@@ -29,7 +29,7 @@ class LUIS(BASE):
         """
         prediction_request = {"query": self.input_sentence}
 
-        self.prediction_response = self.client_runtime.prediction.get_slot_prediction(self.config.app_id, "Production", prediction_request)
+        self.prediction_response = self.client_runtime.prediction.get_slot_prediction(self.config.app_id, "Production", prediction_request, show_all_intents=True)
 
     
     def recognize_intent(self):
@@ -39,19 +39,17 @@ class LUIS(BASE):
             dict: a dict in the following format
             {
             "top_intent": <name of the intent that has the highest confidence score>,
-            "intents": {
-                <Intent1>: {
-                    "score": <score of intent1>
-                },
-                <Intent2>: {
-                    "score": <score of intent2>
-                },
-                ......(intents are ranked by their scores, from high to low)
-            }
+            "intents": [<Intent1>, <Intent2>], alist of intents ranked by their confidence scores
         """
+        
+
+        list_of_intents = []
+
+        for intent in self.prediction_response.prediction.intents:
+            list_of_intents.append(intent)
 
         return {"top_intent": self.prediction_response.prediction.top_intent,
-                "intents": self.prediction_response.prediction.intents}
+                "intents": list_of_intents}
     
 
     def extract_entity(self):
@@ -93,14 +91,13 @@ class LUIS(BASE):
         """segment user's input sentence
 
         Returns:
-            list: a list of all possible word segmented from user's input
+            dict: a dict of words with their location segmented from user's input in the following format
+            {<word>: [<start_location>, <end_location>]}
         """
-        seg_list = jieba.cut(self.input_sentence, cut_all=True)
-        return list(seg_list)
-
-
-# test = LUIS("我要预定八月一日综体的羽毛球馆")
-# test.predict()
-# print(test.recognize_intent())
-# print(test.extract_entity())
-# print(test.segment_sentence())
+        word_location = {}
+        result = jieba.tokenize(self.input_sentence)
+        for token in result:
+            word_location[token[0]] = [token[1], token[2]]
+        
+        return word_location
+        

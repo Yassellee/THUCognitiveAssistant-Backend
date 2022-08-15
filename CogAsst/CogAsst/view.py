@@ -87,3 +87,37 @@ def get_intentParam(request):
             'code': 200,
             'data': {"intentParam": intentParam, "matchedEntity": process.matchedEntity}
         }, status=200)
+    else:
+        return JsonResponse({
+            'code': 400,
+            'data': "method error"
+        }, status=400)
+
+
+@csrf_exempt
+def get_inputTokenize(request):
+    """
+
+    Returns
+        {
+            "code": 200,
+            "data": {
+                "inputTokenize": "['我', '要', '预约', '明天', '综', '体', '的', '羽毛', '羽毛球', '羽毛球馆', '球馆']"
+            }
+        }
+    """
+    if request.method == 'GET':
+        print(request.GET)
+        username = request.GET.get("username")
+        print(username)
+        tgt_user = User.objects.filter(username = username).first()
+        process = tgt_user.process_user.last()
+        return JsonResponse({
+            'code': 200,
+            'data': {"inputTokenize": process.inputTokenize}
+        }, status=200)
+    else:
+        return JsonResponse({
+            'code': 400,
+            'data': "method error"
+        }, status=400)
