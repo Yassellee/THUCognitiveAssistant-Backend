@@ -107,7 +107,6 @@ def get_inputTokenize(request):
         }
     """
     if request.method == 'GET':
-        print(request.GET)
         username = request.GET.get("username")
         print(username)
         tgt_user = User.objects.filter(username = username).first()
@@ -121,3 +120,43 @@ def get_inputTokenize(request):
             'code': 400,
             'data': "method error"
         }, status=400)
+
+
+@csrf_exempt
+def add_params(request):
+    """ add params and return the failed params' name
+
+    Returns
+        success:
+        {
+            "code": 200,
+            "data": "success"
+        }
+        failed:
+        {
+            "code": 200,
+            "data": {
+                "failedParam": [
+                    "体育馆"
+                ]
+            }
+        }
+    """
+    if request.method == 'POST':
+        failedParam =  add_Param(request)
+        if failedParam == []:
+            return JsonResponse({
+                'code': 200,
+                'data': "success"
+            }, status=200)
+        else:
+            return JsonResponse({
+                'code': 200,
+                'data': {"failedParam": failedParam}
+            }, status=200)
+    else:
+        return JsonResponse({
+            'code': 400,
+            'data': "method error"
+        }, status=400
+        )

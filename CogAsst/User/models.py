@@ -12,7 +12,7 @@ class Process(models.Model):
     sentence = models.CharField(max_length=20, default="", blank = True)
     # state = models.IntegerField(default=0)
     intent = models.CharField(max_length=20, default="", blank = True)
-    intentslist = models.CharField(max_length=20, default="", blank = True)
+    intentslist = models.CharField(max_length=300, default="", blank = True)
     inputTokenize = models.TextField(max_length=300, default="", blank = True)
     matchedEntity = models.TextField(max_length=300, default="", blank = True)
     # paramToAsk = models.TextField(max_length=300, default="", blank = True)

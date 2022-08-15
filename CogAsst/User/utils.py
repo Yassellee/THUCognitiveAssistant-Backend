@@ -1,3 +1,4 @@
+from sqlite3 import paramstyle
 from User.models import *
 from Intent.models import *
 import json
@@ -53,6 +54,40 @@ def get_paramToAsk(tgt_user, message):
     tgt_user.paramToAsk = str(ast.literal_eval(tgt_user.paramToAsk)[1:])
     tgt_user.save()
     return ast.literal_eval(tgt_user.paramToAsk)
+
+
+def add_Param(request):
+    params = request.POST.get("params")
+    params = ast.literal_eval(params)
+    username = request.POST.get("username")
+    tgt_user = User.objects.filter(username = username).first()
+    process = tgt_user.process_user.last()
+    matchedEntity = ast.literal_eval(process.matchedEntity)
+    print(process.intent)
+    paramRequired = Intent.objects.filter(name = process.intent).first().entity
+    paramRequired = ast.literal_eval(paramRequired)
+    keys = list(paramRequired.keys())
+    for key in keys:
+        for paramName in list(params.keys()):
+            if paramRequired[key] != 0:
+                if paramName in paramRequired[key] :
+                    if key not in matchedEntity:
+                        matchedEntity[key] = [{}]
+                    matchedEntity[key][0][paramName] = [params[paramName]]
+                    params[paramName] = True
+            else:
+                if paramName == key:
+                    matchedEntity[key] = params[paramName]
+                    params[paramName] = True
+    process.matchedEntity = matchedEntity
+    process.save()
+    failedParam = []
+    for item in params:
+        if params[item] is not True:
+            failedParam.append(item)
+    return failedParam
+
+
 
 
 # {'体育馆': ['体育馆名称‘, '体育场地'], 'datetimeV2': 0}

@@ -77,7 +77,7 @@ from strategy.LUIS_strategy import *
 #                 update_state(id, 4)
 #     elif state == 4:
 #         # TODO add
-#         paramToAsk = get_paramToAsk(tgt_user, message)
+        # paramToAsk = get_paramToAsk(tgt_user, message)
 #         if paramToAsk == []:  # 开始执行
 #             feedback = {"result": "finish", "intent": tgt_user.intent, "message": "", "candidate":['',''], "candidateParams":tgt_user.inputTokenize}
 #             update_state(id, 5)
