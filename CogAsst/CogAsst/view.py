@@ -83,9 +83,10 @@ def get_intentParam(request):
         process.intent = intent
         process.save()
         intentParam = Intent.objects.filter(name = intent).first().entity
+        intentParamList = getIntentParamList(intentParam)
         return JsonResponse({
             'code': 200,
-            'data': {"intentParam": intentParam, "matchedEntity": process.matchedEntity}
+            'data': [intentParamList, getMatchedEntityList(process.matchedEntity, intentParamList)]
         }, status=200)
     else:
         return JsonResponse({

@@ -102,3 +102,31 @@ def update_message(id, message):
     matchedEntity = luis.extract_entity()
     Process.objects.create(user = tgt_user, sentence = message, intentslist = intentslist, inputTokenize = inputTokenize, matchedEntity = matchedEntity)
     return intentslist
+
+
+def getIntentParamList(intentparam):
+    result = []
+    intentparam = ast.literal_eval(intentparam)
+    keys = list(intentparam.keys())
+    for key in keys:
+        if intentparam[key]!=0:
+            result += intentparam[key]
+        else:
+            result.append(key)
+    return result
+
+
+def getMatchedEntityList(matchedEntity, intentParamList):
+    print(matchedEntity)
+    result = []
+    matchedEntity = ast.literal_eval(matchedEntity)
+    keys = list(matchedEntity.keys())
+    for keyParam in intentParamList:
+        for key in keys:
+            if keyParam == "datetimeV2" and key == "datetimeV2":
+                result.append(matchedEntity['datetimeV2'][0]['values'][0]['timex'])
+            else:
+                for item in matchedEntity[key][0].keys():
+                    if item == keyParam:
+                        result += (matchedEntity[key][0][item])
+    return result
