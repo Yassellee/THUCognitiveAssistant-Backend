@@ -121,12 +121,19 @@ def getMatchedEntityList(matchedEntity, intentParamList):
     result = []
     matchedEntity = ast.literal_eval(matchedEntity)
     keys = list(matchedEntity.keys())
-    for keyParam in intentParamList:
+    for i in range(0, len(intentParamList)):
+        keyParam = intentParamList[i]
         for key in keys:
             if keyParam == "datetimeV2" and key == "datetimeV2":
-                result.append(matchedEntity['datetimeV2'][0]['values'][0]['timex'])
-            else:
+                try:
+                    result.append(matchedEntity['datetimeV2'][0]['values'][0]['timex'])
+                except:
+                    result.append(matchedEntity['datetimeV2'])
+            elif key != 'datetimeV2':
+                print(matchedEntity[key])
                 for item in matchedEntity[key][0].keys():
                     if item == keyParam:
                         result += (matchedEntity[key][0][item])
+        if len(result) <  i+1:
+            result.append('')
     return result
