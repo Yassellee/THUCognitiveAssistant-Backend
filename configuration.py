@@ -17,3 +17,4 @@ class Config:
         self.app_name = "AutoPat"
         self.version_id = "0.1"
         self.app_id = "bf2c83c3-61b9-48af-8977-bb7a51b0d002"
+

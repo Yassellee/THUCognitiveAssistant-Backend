@@ -161,3 +161,13 @@ def add_params(request):
             'data': "method error"
         }, status=400
         )
+
+
+@csrf_exempt
+def init(request):
+    print('yes')
+    addIntent2db()
+    return JsonResponse({
+        'code': 200,
+        'data': "succss"
+    }, status=200)

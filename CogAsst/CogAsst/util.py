@@ -4,6 +4,8 @@ from User.models import *
 from Intent.utils import *
 from User.utils import *
 from strategy.LUIS_strategy import *
+import codecs
+import csv
 
 # # query parameters that didn't matched and generate reply
 # def askParam(tgt_user, paramToAsk, candidateParams, intent):
@@ -90,6 +92,18 @@ from strategy.LUIS_strategy import *
 #     else:
 #         feedback = {"result": "eror", "intent": "", "message": "", "candidate":['',''],"preparedParams":""}
 #     return feedback
+
+
+
+
+def addIntent2db():
+    with codecs.open('../intent2db.csv', encoding='utf-8-sig') as f:
+        for row in csv.DictReader(f, skipinitialspace=True):
+            tgt_intent = Intent.objects.filter(name  = row['Name']).first()
+            if tgt_intent is None:
+                print("none")
+                Intent.objects.create(name = row["Name"], entity = row["Entity"])
+
 
 
 def update_message(id, message):
