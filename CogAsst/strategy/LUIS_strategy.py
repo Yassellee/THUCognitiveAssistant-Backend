@@ -3,7 +3,8 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 os.chdir(basedir)
 sys.path.append(basedir)
 from BASE_strategy import BASE
-sys.path.append("..\..")
+# sys.path.append("..")
+# from .. import configuration
 from configuration import Config
 from msrest.authentication import CognitiveServicesCredentials
 from azure.cognitiveservices.language.luis.runtime import LUISRuntimeClient

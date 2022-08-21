@@ -3,7 +3,7 @@ from azure.cognitiveservices.language.luis.authoring import LUISAuthoringClient
 from msrest.authentication import CognitiveServicesCredentials
 import sys, time
 sys.path.append("..\..")
-from configuration import Config
+from CogAsst.configuration import Config
 
 
 class LUIS_editor(BASE_editor):
