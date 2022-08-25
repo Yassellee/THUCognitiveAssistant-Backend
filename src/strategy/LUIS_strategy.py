@@ -98,3 +98,9 @@ class LUIS(BASE):
         
         return word_location
         
+
+luis = LUIS("我要预约八月十号的综体羽毛球馆。")
+
+luis.predict()
+
+print(luis.segment_sentence())
