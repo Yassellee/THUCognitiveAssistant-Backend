@@ -57,8 +57,8 @@ def get_paramToAsk(tgt_user, message):
 
 
 def add_Param(request):
-    params = request.POST.get("params")
-    params = ast.literal_eval(params)
+    position = ast.literal_eval(request.POST.get("position"))
+    content = ast.literal_eval(request.POST.get("content"))
     username = request.POST.get("username")
     tgt_user = User.objects.filter(username = username).first()
     process = tgt_user.process_user.last()
@@ -68,22 +68,27 @@ def add_Param(request):
     paramRequired = ast.literal_eval(paramRequired)
     keys = list(paramRequired.keys())
     for key in keys:
-        for paramName in list(params.keys()):
+        for paramName in list(content.keys()):
             if paramRequired[key] != 0:
                 if paramName in paramRequired[key] :
                     if key not in matchedEntity:
-                        matchedEntity[key] = [{}]
-                    matchedEntity[key][0][paramName] = [params[paramName]]
-                    params[paramName] = True
+                        matchedEntity[key] = {}
+                    matchedEntity[key]['text'] = content[paramName]
+                    matchedEntity[key]['startIndex'] = position[paramName][0]
+                    matchedEntity[key]['endIndex'] = position[paramName][1]
+                    content[paramName] = True
             else:
                 if paramName == key:
-                    matchedEntity[key] = params[paramName]
-                    params[paramName] = True
+                    matchedEntity[key] = {}
+                    matchedEntity[key]['text'] = content[paramName]
+                    matchedEntity[key]['startIndex'] = position[paramName][0]
+                    matchedEntity[key]['endIndex'] = position[paramName][1]
+                    content[paramName] = True
     process.matchedEntity = matchedEntity
     process.save()
     failedParam = []
-    for item in params:
-        if params[item] is not True:
+    for item in content:
+        if content[item] is not True:
             failedParam.append(item)
     return failedParam
 

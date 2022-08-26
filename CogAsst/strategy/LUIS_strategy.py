@@ -30,7 +30,7 @@ class LUIS(BASE):
         """
         prediction_request = {"query": self.input_sentence}
 
-        self.prediction_response = self.client_runtime.prediction.get_slot_prediction(self.config.app_id, "Production", prediction_request, show_all_intents=True)
+        self.prediction_response = self.client_runtime.prediction.get_slot_prediction(self.config.app_id, "Production", prediction_request, show_all_intents=True, verbose=True)
 
     
     def recognize_intent(self):
@@ -62,30 +62,67 @@ class LUIS(BASE):
         Returns:
             dict: a dict in the following format
             {
-                "<top level entity>": [
-                    {
-                        "<second level entity 1>": [
-                            <data of the second level entity 1>
-                        ],
-                        "<second level entity 2>": [
-                            <data of the second level entity 2>
-                        ],
-                        ......
-                    }
-                ]
+                children_level_unprebuilt_entity1:
+                {
+                    "text": ...
+                    "startIndex": ...
+                    "endIndex": ...
+                },
+                children_level_unprebuilt_entity2:
+                {
+                    "text": ...
+                    "startIndex": ...
+                    "endIndex": ...
+                },
+                prebuilt_entity1:
+                {
+                    ...
+                },
+                prebuilt_entity2:
+                {
+                    ...
+                },
+                ...
             }
         }
         """
+        def is_contains_chinese(strs):
+            for _char in strs:
+                if '\u4e00' <= _char <= '\u9fa5':
+                    return True
+            return False
+
         entities = self.prediction_response.prediction.entities
 
+        try:
+            entities.pop("$instance")
+        except:
+            raise KeyError
+
+        ret_dict = {}
+
         for key in entities:
-            if "$instance" in entities[key]:
-                try:
-                    entities[key].pop("$instance")
-                except:
-                    raise KeyError
-        
-        return entities
+            if is_contains_chinese(key):
+                current_instance = entities.get(key)[0].get("$instance")
+                for instance_key in current_instance:
+                    dict_to_process = current_instance.get(instance_key)[0]
+                    dict_to_process["endIndex"] = dict_to_process["startIndex"]+dict_to_process["length"]-1
+
+                    try:
+                        dict_to_process.pop("type")
+                        dict_to_process.pop("length")
+                        dict_to_process.pop("score")
+                        dict_to_process.pop("modelTypeId")
+                        dict_to_process.pop("modelType")
+                        dict_to_process.pop("recognitionSources")
+                    except:
+                        raise KeyError
+                
+                    ret_dict[instance_key] = dict_to_process
+            else:
+                ret_dict[key] = entities[key]
+
+        return ret_dict
     
 
     def segment_sentence(self):
@@ -102,3 +139,9 @@ class LUIS(BASE):
         
         return word_location
         
+
+# luis = LUIS("我要预约八月十号的综体羽毛球馆。")
+
+# luis.predict()
+
+# print(luis.extract_entity())
