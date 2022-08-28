@@ -90,12 +90,14 @@ class LUIS(BASE):
                     return True
             return False
 
+        def pop_with_check(key, dict):
+            if key in dict:
+                dict.pop(key)
+
         entities = self.prediction_response.prediction.entities
 
-        try:
-            entities.pop("$instance")
-        except:
-            raise KeyError
+
+        pop_with_check("$instance", entities)
 
         ret_dict = {}
 
@@ -107,12 +109,12 @@ class LUIS(BASE):
                     dict_to_process["endIndex"] = dict_to_process["startIndex"]+dict_to_process["length"]-1
 
                     try:
-                        dict_to_process.pop("type")
-                        dict_to_process.pop("length")
-                        dict_to_process.pop("score")
-                        dict_to_process.pop("modelTypeId")
-                        dict_to_process.pop("modelType")
-                        dict_to_process.pop("recognitionSources")
+                        pop_with_check("type", dict_to_process)
+                        pop_with_check("length", dict_to_process)
+                        pop_with_check("score", dict_to_process)
+                        pop_with_check("modelTypeId", dict_to_process)
+                        pop_with_check("modelType", dict_to_process)
+                        pop_with_check("recognitionSources", dict_to_process)
                     except:
                         raise KeyError
                 
@@ -138,7 +140,7 @@ class LUIS(BASE):
         return word_location
         
 
-luis = LUIS("我要预约八月十号的综体羽毛球馆。")
+luis = LUIS("我要预约体育馆")
 
 luis.predict()
 
