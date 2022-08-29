@@ -70,7 +70,7 @@ class LUIS_editor(BASE_editor):
         Args:
             prebuilt_extractor_name (str): name of the prebuilt entity to be added
         """
-        self.client.model.add_prebuilt(self.appId, self.versionId, prebuilt_extractor_names=[prebuilt_extractor_name])
+        self.client.model.add_prebuilt(self.config.app_id, self.config.version_id, prebuilt_extractor_names=[prebuilt_extractor_name])
 
 
     def add_example_utterance(self, labeled_example_utterance):
@@ -112,7 +112,7 @@ class LUIS_editor(BASE_editor):
         #         }
         #     ]
         # }
-        self.client.examples.add(self.appId, self.versionId, labeled_example_utterance, {"enableNestedChildren": True})
+        self.client.examples.add(self.config.app_id, self.config.version_id, labeled_example_utterance, {"enableNestedChildren": True})
 
     
     def add_feature(self, entity_id, phrase_dict, feature_name):
@@ -131,19 +131,19 @@ class LUIS_editor(BASE_editor):
         #     "name": "QuantityPhraselist",
         #     "phrases": "few,more,extra"
         # }
-        self.client.features.add_phrase_list(self.appId, self.versionId, phrase_dict)
+        self.client.features.add_phrase_list(self.config.app_id, self.config.version_id, phrase_dict)
         phraseListFeatureDefinition = {"feature_name": feature_name, "model_name": None}
-        self.client.features.add_entity_feature(self.appId, self.versionId, entity_id, phraseListFeatureDefinition)
+        self.client.features.add_entity_feature(self.config.app_id, self.config.version_id, entity_id, phraseListFeatureDefinition)
 
 
     def train_app(self):
         """ name tells everything
         """
 
-        self.client.train.train_version(self.appId, self.versionId)
+        self.client.train.train_version(self.config.app_id, self.config.version_id)
         waiting = True
         while waiting:
-            info = self.client.train.get_status(self.appId, self.versionId)
+            info = self.client.train.get_status(self.config.app_id, self.config.version_id)
 
             waiting = any(map(lambda x: 'Queued' == x.details.status or 'InProgress' == x.details.status, info))
             if waiting:
@@ -157,6 +157,6 @@ class LUIS_editor(BASE_editor):
     def publish_app(self):
         """name tells everything
         """
-        self.client.apps.update_settings(self.appId, is_public=True)
+        self.client.apps.update_settings(self.config.app_id, is_public=True)
 
-        self.client.apps.publish(self.appId, self.versionId, is_staging=False)
+        self.client.apps.publish(self.config.app_id, self.config.version_id, is_staging=False)
