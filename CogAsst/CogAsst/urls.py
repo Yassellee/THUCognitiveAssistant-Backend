@@ -11,5 +11,6 @@ urlpatterns = [
     path('get_intentParam/', view.get_intentParam),
     path('get_inputTokenize', view.get_inputTokenize),
     path('add_params/', view.add_params),
-    path('init', view.init)
+    path('init', view.init),
+    path('add_utterance/', view.add_utterance)
 ]

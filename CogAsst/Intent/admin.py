@@ -3,6 +3,7 @@ from Intent import models
 
 
 admin.site.register(models.Feature)
+admin.site.register(models.Utterance)
 
 class IntentAdmin(admin.ModelAdmin):
     list_display =['name', 'show_features']

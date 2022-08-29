@@ -1,5 +1,8 @@
+from inspect import isdatadescriptor
+from socket import BTPROTO_RFCOMM
 from ssl import OP_NO_COMPRESSION
 from strategy.LUIS_strategy import *
+from utils.LUIS_editor import *
 from CogAsst.util  import *
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt 
@@ -165,9 +168,76 @@ def add_params(request):
 
 @csrf_exempt
 def init(request):
-    print('yes')
+    # print('yes')
     addIntent2db()
     return JsonResponse({
         'code': 200,
         'data': "succss"
     }, status=200)
+
+
+@csrf_exempt
+def add_utterance(request):
+    if request.method == 'POST':
+        username = request.POST.get("username")
+        tgt_user = User.objects.filter(username = username).first()
+        process = tgt_user.process_user.last()
+        print(process.intent)
+        intentParam = Intent.objects.filter(name = process.intent).first().entity
+        intentParam = ast.literal_eval(intentParam)
+        matchedParam = process.matchedEntity
+        matchedParam = ast.literal_eval(matchedParam)
+        labeled_example_utterance = {}
+        labeled_example_utterance['text'] = process.sentence
+        labeled_example_utterance['intentName'] = process.intent
+        labeled_example_utterance['entityLabels'] = []
+        for i in range(len(list(intentParam.keys()))):
+            param = list(intentParam.keys())[i]
+            if intentParam[param] != 0:
+                labeled_example_utterance['entityLabels'].append({})
+                labeled_example_utterance['entityLabels'][i]['startCharIndex'] = 0
+                labeled_example_utterance['entityLabels'][i]['endCharIndex'] = len(process.sentence)-1
+                labeled_example_utterance['entityLabels'][i]['entityName'] = param
+                labeled_example_utterance['entityLabels'][i]['children'] = []
+                for childParam in intentParam[param]:
+                    if childParam in matchedParam.keys():
+                        labeled_example_utterance['entityLabels'][i]['children'].append({
+                            "startCharIndex": matchedParam[childParam]['startIndex'],
+                            "endCharIndex": matchedParam[childParam]['endIndex'],
+                            "entityName": childParam,
+                        })
+                    else:
+                        return JsonResponse({
+                            'code': 400,
+                            'data': childParam + 'is not matched'
+                        }, status=400
+                        )
+        luis_editor = LUIS_editor()
+        # luis_editor.add_example_utterance(labeled_example_utterance)
+        Utterance.objects.create(intent = Intent.objects.filter(name = process.intent).first(), utterance = labeled_example_utterance)
+        no_add = 0
+        for utterance in reversed(Utterance.objects.all()):
+            if utterance.isAdd == 0:
+                no_add += 1
+                if no_add == 5:  # TODO add this to configratiion file
+                    luis_editor.train_app()
+                    luis_editor.publish_app()
+                    for utterance in reversed(Utterance.objects.all()):
+                        utterance.isAdd = 1
+                        utterance.save()
+                        no_add -= 1
+                        if no_add == 0:
+                            break
+            else:
+                break
+        return JsonResponse({
+            'code': 200,
+            'data': "success",
+        }, status=200
+        )
+    else:
+        return JsonResponse({
+            'code': 400,
+            'data': "method error"
+        }, status=400
+        )

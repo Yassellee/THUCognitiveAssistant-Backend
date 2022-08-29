@@ -1,9 +1,13 @@
+import os, sys
+basedir = os.path.abspath(os.path.dirname(__file__))
+os.chdir(basedir)
+sys.path.append(basedir)
 from BASE_editor import BASE_editor
 from azure.cognitiveservices.language.luis.authoring import LUISAuthoringClient
 from msrest.authentication import CognitiveServicesCredentials
 import sys, time
-sys.path.append("..\..")
-from CogAsst.configuration import Config
+# sys.path.append("..\..")
+from configuration import Config
 
 
 class LUIS_editor(BASE_editor):

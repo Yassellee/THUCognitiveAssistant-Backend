@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 
 class Intent(models.Model):
@@ -16,7 +17,10 @@ class Feature(models.Model):
     intent = models.ForeignKey(Intent, related_name='feature_intent', on_delete=models.CASCADE)
     feature = models.TextField(max_length=300, default="")
 
-
+class Utterance(models.Model):
+    intent = models.ForeignKey(Intent, related_name='utterance_intent', on_delete=models.CASCADE)
+    isAdd = models.IntegerField(default = 0)
+    utterance = models.TextField(max_length=300, default="")
 
 
 # 表述积累
