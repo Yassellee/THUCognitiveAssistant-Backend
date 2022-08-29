@@ -213,7 +213,7 @@ def add_utterance(request):
                         }, status=400
                         )
         luis_editor = LUIS_editor()
-        # luis_editor.add_example_utterance(labeled_example_utterance)
+        luis_editor.add_example_utterance(labeled_example_utterance)
         Utterance.objects.create(intent = Intent.objects.filter(name = process.intent).first(), utterance = labeled_example_utterance)
         no_add = 0
         for utterance in reversed(Utterance.objects.all()):
@@ -222,6 +222,7 @@ def add_utterance(request):
                 if no_add == 5:  # TODO add this to configratiion file
                     luis_editor.train_app()
                     luis_editor.publish_app()
+                    print('train')
                     for utterance in reversed(Utterance.objects.all()):
                         utterance.isAdd = 1
                         utterance.save()
