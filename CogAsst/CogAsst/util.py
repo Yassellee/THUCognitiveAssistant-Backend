@@ -6,6 +6,9 @@ from User.utils import *
 from strategy.LUIS_strategy import *
 import codecs
 import csv
+import time
+import threading
+
 
 # # query parameters that didn't matched and generate reply
 # def askParam(tgt_user, paramToAsk, candidateParams, intent):
@@ -164,3 +167,58 @@ def getMatchedEntityList(matchedEntity, intentParamList):
     #     for key in keys:
     #         result.append()
     return keys
+
+
+class MyThread(threading.Thread):
+    def __init__(self, target, args=()):
+        super(MyThread, self).__init__()
+        self.func = target
+        self.args = args
+        self.result = None
+
+    def run(self):
+        # 接受返回值
+        # print(*self.args)
+        self.result = self.func(*self.args)
+
+    def get_result(self):
+        # 线程不结束,返回值为None
+        try:
+            return self.result
+        except Exception:
+            return None
+
+
+# 为了限制真实请求时间或函数执行时间的装饰器
+def limit_decor(limit_time):
+    """
+    :param limit_time: 设置最大允许执行时长,单位:秒
+    :return: 未超时返回被装饰函数返回值,超时则返回 None
+    """
+
+    def functions(func):
+        # 执行操作
+        def run(*params):
+            this_func = MyThread(target=func, args=params)
+            # 主线程结束(超出时长),则线程方法结束
+            this_func.setDaemon(True)
+            this_func.start()
+            # 计算分段沉睡次数
+            sleep_num = int(limit_time // 1)
+            sleep_nums = round(limit_time % 1, 1)
+            # 多次短暂沉睡并尝试获取返回值
+            for i in range(sleep_num):
+                time.sleep(1)
+                info = this_func.get_result()
+                if info is not None:
+                    return info
+            time.sleep(sleep_nums)
+            # 最终返回值(不论线程是否已结束)
+            if this_func.get_result() is not None:
+                return this_func.get_result()
+            else:
+                return -1  # 超时返回  可以自定义
+
+        return run
+
+    return functions

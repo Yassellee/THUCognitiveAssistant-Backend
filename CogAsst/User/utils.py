@@ -67,15 +67,17 @@ def add_Param(request):
     paramRequired = Intent.objects.filter(name = process.intent).first().entity
     paramRequired = ast.literal_eval(paramRequired)
     keys = list(paramRequired.keys())
+    print(keys)
+    print(content.keys())
     for key in keys:
         for paramName in list(content.keys()):
             if paramRequired[key] != 0:
                 if paramName in paramRequired[key] :
-                    if key not in matchedEntity:
-                        matchedEntity[key] = {}
-                    matchedEntity[key]['text'] = content[paramName]
-                    matchedEntity[key]['startIndex'] = position[paramName][0]
-                    matchedEntity[key]['endIndex'] = position[paramName][1]
+                    if paramName not in matchedEntity:
+                        matchedEntity[paramName] = {}
+                    matchedEntity[paramName]['text'] = content[paramName]
+                    matchedEntity[paramName]['startIndex'] = position[paramName][0]
+                    matchedEntity[paramName]['endIndex'] = position[paramName][1]
                     content[paramName] = True
             else:
                 if paramName == key:

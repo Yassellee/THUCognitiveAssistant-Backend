@@ -1,6 +1,3 @@
-from inspect import isdatadescriptor
-from socket import BTPROTO_RFCOMM
-from ssl import OP_NO_COMPRESSION
 from strategy.LUIS_strategy import *
 from utils.LUIS_editor import *
 from CogAsst.util  import *
@@ -8,6 +5,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt 
 from django.http import JsonResponse
 from strategy.LUIS_strategy import *
+import time
 
 
 @csrf_exempt
@@ -176,6 +174,25 @@ def init(request):
     }, status=200)
 
 
+@limit_decor(60)
+def run_add_utterance(labeled_example_utterance:str,train):
+    try:
+        print(train)
+        print('in add')
+        luis_editor = LUIS_editor()
+        print(labeled_example_utterance)
+        luis_editor.add_example_utterance(ast.literal_eval(labeled_example_utterance))
+        print('added')
+        if train:
+            print('train pre')
+            luis_editor.train_app()
+            luis_editor.publish_app()
+            print('train')
+    except Exception:
+        return -1
+
+
+
 @csrf_exempt
 def add_utterance(request):
     if request.method == 'POST':
@@ -212,17 +229,15 @@ def add_utterance(request):
                             'data': childParam + 'is not matched'
                         }, status=400
                         )
-        luis_editor = LUIS_editor()
-        luis_editor.add_example_utterance(labeled_example_utterance)
         Utterance.objects.create(intent = Intent.objects.filter(name = process.intent).first(), utterance = labeled_example_utterance)
         no_add = 0
+        train = False
         for utterance in reversed(Utterance.objects.all()):
             if utterance.isAdd == 0:
                 no_add += 1
                 if no_add == 5:  # TODO add this to configratiion file
-                    luis_editor.train_app()
-                    luis_editor.publish_app()
-                    print('train')
+                    train = True
+                    print('tttt')
                     for utterance in reversed(Utterance.objects.all()):
                         utterance.isAdd = 1
                         utterance.save()
@@ -231,6 +246,17 @@ def add_utterance(request):
                             break
             else:
                 break
+        t1 = MyThread(target=run_add_utterance, args=(str(labeled_example_utterance),train))
+        t1.start()
+        # t1.join()
+        result = t1.get_result()
+        if result == -1:
+            Utterance.objects.filter()
+            return JsonResponse({
+            'code': 400,
+            'data': "thread error",
+        }, status=400
+        )
         return JsonResponse({
             'code': 200,
             'data': "success",
