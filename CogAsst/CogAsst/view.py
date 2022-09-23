@@ -84,6 +84,7 @@ def get_intentParam(request):
         process.intent = intent
         process.save()
         intentParam = Intent.objects.filter(name = intent).first().entity
+        print(intentParam)
         intentParamList = getIntentParamList(intentParam)
         return JsonResponse({
             'code': 200,
@@ -268,3 +269,23 @@ def add_utterance(request):
             'data': "method error"
         }, status=400
         )
+
+
+@csrf_exempt
+def get_matchedParamInfo(request):
+    if request.method == 'POST':
+        username = request.POST.get("username")
+        tgt_user = User.objects.filter(username = username).first()
+        process = tgt_user.process_user.last()
+        intent = process.intent
+        intentParam = Intent.objects.filter(name = intent).first().entity
+        intentParamList = getIntentParamList(intentParam)
+        return JsonResponse({
+            'code': 200,
+            'data': [intentParamList, getMatchedEntityInfo(process.matchedEntity, intentParamList)]
+        }, status=200)
+    else:
+        return JsonResponse({
+            'code': 400,
+            'data': "method error"
+        }, status=400)

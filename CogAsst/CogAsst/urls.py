@@ -9,6 +9,7 @@ urlpatterns = [
     # path('result/', view.result),
     path('get_intentlist/', view.get_intentlist),
     path('get_intentParam/', view.get_intentParam),
+    path('get_matchedParam/',view.get_matchedParamInfo),
     path('get_inputTokenize', view.get_inputTokenize),
     path('add_params/', view.add_params),
     path('init', view.init),

@@ -103,12 +103,13 @@ def addIntent2db():
     with codecs.open('../intent2db.csv', encoding='utf-8-sig') as f:
         for row in csv.DictReader(f, skipinitialspace=True):
             tgt_intent = Intent.objects.filter(name  = row['Name']).first()
-            # if tgt_intent is None:
-            print("none")
-            intent_ = Intent.objects.create(name = row["Name"], entity = row["Entity"])
+            if tgt_intent :
+                print('yes')
+                tgt_intent.delete()
+            tgt_intent = Intent.objects.create(name = row["Name"], entity = row["Entity"])
             features = ast.literal_eval(row["Features"])
             for key in list(features.keys()):
-                Feature.objects.create(intent = intent_, feature_name = key, feature = str(features[key]))
+                Feature.objects.create(intent = tgt_intent, feature_name = key, feature = str(features[key]))
 
 
 
@@ -128,9 +129,12 @@ def getIntentParamList(intentparam):
     result = []
     intentparam = ast.literal_eval(intentparam)
     keys = list(intentparam.keys())
+    print(intentparam)
+    print(keys)
     for key in keys:
         if intentparam[key]!=0:
-            result += intentparam[key]
+            if intentparam[key] != []:
+                result += (intentparam[key])
         else:
             result.append(key)
     return result
@@ -166,6 +170,33 @@ def getMatchedEntityList(matchedEntity, intentParamList):
     #     keyParam = intentParamList[i]
     #     for key in keys:
     #         result.append()
+    return keys
+
+
+def getMatchedEntityInfo(matchedEntity, intentParamList):
+    print(matchedEntity)
+    result = []
+    matchedEntity = ast.literal_eval(matchedEntity)
+    keys = list(matchedEntity.keys())
+    for i in range(0, len(intentParamList)):
+        keyParam = intentParamList[i]
+        for key in keys:
+            if key == keyParam:
+                if keyParam == "datetimeV2" :
+                    try:
+                        result.append(matchedEntity['datetimeV2'][0]['values'][0]['timex'])
+                    except:
+                        result.append(matchedEntity['datetimeV2'])
+                else:
+                    result.append(matchedEntity[key]['text'])
+        if len(result) <  i+1:
+            result.append('')
+    print(result)
+    return result
+    for i in range(0, len(intentParamList)):
+        keyParam = intentParamList[i]
+        for key in keys:
+            result.append()
     return keys
 
 
