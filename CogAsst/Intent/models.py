@@ -10,7 +10,7 @@ class Intent(models.Model):
         print(query_features)
         res = [i.feature_name for i in query_features]
         return res
-    show_features.short_description = 'intent'
+    show_features.short_description = 'features'
 
 class Feature(models.Model):
     feature_name = models.CharField(max_length=20, default="", verbose_name="feature_name")

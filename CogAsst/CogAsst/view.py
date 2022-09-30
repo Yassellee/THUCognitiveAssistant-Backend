@@ -46,16 +46,20 @@ def get_intentlist(request):
         }
     """
     if request.method == 'POST':
-        username = request.POST.get("username")
-        message = request.POST.get("message")
-        intentlist = update_message(username, message)
-        print(intentlist)
-        print(type(intentlist))
-        data = str({"intents": intentlist})
-        return JsonResponse({
-            'code': 200,
-            'data': data
-        }, status=200)
+        try:
+            username = request.POST.get("username")
+            message = request.POST.get("message")
+            intentlist, process = update_message(username, message)
+            print(intentlist)
+            print(type(intentlist))
+            data = str({"intents": intentlist})
+            gen_sendlog('get_intentlist', request, process)
+            return gen_response(200, data, process)
+        except:
+            return JsonResponse({
+                'code': 400,
+                'data': "post error"
+            }, status=400)
     else:
         return JsonResponse({
             'code': 400,
@@ -77,19 +81,32 @@ def get_intentParam(request):
         }
     """
     if request.method == 'POST':
-        intent = request.POST.get("intent")
-        username = request.POST.get("username")
-        tgt_user = User.objects.filter(username = username).first()
-        process = tgt_user.process_user.last()
-        process.intent = intent
-        process.save()
-        intentParam = Intent.objects.filter(name = intent).first().entity
-        print(intentParam)
-        intentParamList = getIntentParamList(intentParam)
-        return JsonResponse({
-            'code': 200,
-            'data': [intentParamList, getMatchedEntityList(process.matchedEntity, intentParamList)]
-        }, status=200)
+        try:
+            intent = request.POST.get("intent")
+            username = request.POST.get("username")
+            tgt_user = User.objects.filter(username = username).first()
+            if tgt_user == None:
+                return JsonResponse({
+                    'code': 400,
+                    'data': "user does not exist"
+                }, status=400)
+            process = tgt_user.process_user.last()
+            process.intent = intent
+            process.save()
+            gen_sendlog('get_intentParam', request, process)
+            try:
+                intentParam = Intent.objects.filter(name = intent).first().entity
+            except:
+                return gen_response(400,"intent does not exist", process)
+            print(intentParam)
+            intentParamList = getIntentParamList(intentParam)
+            data = [intentParamList, getMatchedEntityList(process.matchedEntity, intentParamList)]
+            return gen_response(200,data,process)
+        except:
+            return JsonResponse({
+                'code': 400,
+                'data': "post error"
+            }, status=400)
     else:
         return JsonResponse({
             'code': 400,
@@ -113,11 +130,15 @@ def get_inputTokenize(request):
         username = request.GET.get("username")
         print(username)
         tgt_user = User.objects.filter(username = username).first()
+        if tgt_user == None:
+                return JsonResponse({
+                    'code': 400,
+                    'data': "user does not exist"
+                }, status=400)
         process = tgt_user.process_user.last()
-        return JsonResponse({
-            'code': 200,
-            'data': {"inputTokenize": process.inputTokenize}
-        }, status=200)
+        gen_sendlog('get_inputTokenize', request, process)
+        data = {"inputTokenize": process.inputTokenize}
+        return gen_response(200, data, process)
     else:
         return JsonResponse({
             'code': 400,
@@ -146,17 +167,19 @@ def add_params(request):
         }
     """
     if request.method == 'POST':
-        failedParam =  add_Param(request)
-        if failedParam == []:
+        try: 
+            failedParam, process =  add_Param(request)
+            gen_sendlog('add_params', request, process)
+            if failedParam == []:
+                return gen_response(200, "success", process)
+            else:
+                return gen_response(200, {"failedParam": failedParam}, process)
+        except:
             return JsonResponse({
-                'code': 200,
-                'data': "success"
-            }, status=200)
-        else:
-            return JsonResponse({
-                'code': 200,
-                'data': {"failedParam": failedParam}
-            }, status=200)
+                'code': 400,
+                'data': "post error"
+            }, status=400
+            )
     else:
         return JsonResponse({
             'code': 400,
@@ -197,72 +220,75 @@ def run_add_utterance(labeled_example_utterance:str,train):
 @csrf_exempt
 def add_utterance(request):
     if request.method == 'POST':
-        username = request.POST.get("username")
-        tgt_user = User.objects.filter(username = username).first()
-        process = tgt_user.process_user.last()
-        print(process.intent)
-        intentParam = Intent.objects.filter(name = process.intent).first().entity
-        intentParam = ast.literal_eval(intentParam)
-        matchedParam = process.matchedEntity
-        matchedParam = ast.literal_eval(matchedParam)
-        labeled_example_utterance = {}
-        labeled_example_utterance['text'] = process.sentence
-        labeled_example_utterance['intentName'] = process.intent
-        labeled_example_utterance['entityLabels'] = []
-        for i in range(len(list(intentParam.keys()))):
-            param = list(intentParam.keys())[i]
-            if intentParam[param] != 0:
-                labeled_example_utterance['entityLabels'].append({})
-                labeled_example_utterance['entityLabels'][i]['startCharIndex'] = 0
-                labeled_example_utterance['entityLabels'][i]['endCharIndex'] = len(process.sentence)-1
-                labeled_example_utterance['entityLabels'][i]['entityName'] = param
-                labeled_example_utterance['entityLabels'][i]['children'] = []
-                for childParam in intentParam[param]:
-                    if childParam in matchedParam.keys():
-                        labeled_example_utterance['entityLabels'][i]['children'].append({
-                            "startCharIndex": matchedParam[childParam]['startIndex'],
-                            "endCharIndex": matchedParam[childParam]['endIndex'],
-                            "entityName": childParam,
-                        })
-                    else:
-                        return JsonResponse({
-                            'code': 400,
-                            'data': childParam + 'is not matched'
-                        }, status=400
-                        )
-        Utterance.objects.create(intent = Intent.objects.filter(name = process.intent).first(), utterance = labeled_example_utterance)
-        no_add = 0
-        train = False
-        for utterance in reversed(Utterance.objects.all()):
-            if utterance.isAdd == 0:
-                no_add += 1
-                if no_add == 5:  # TODO add this to configratiion file
-                    train = True
-                    print('tttt')
-                    for utterance in reversed(Utterance.objects.all()):
-                        utterance.isAdd = 1
-                        utterance.save()
-                        no_add -= 1
-                        if no_add == 0:
-                            break
-            else:
-                break
-        t1 = MyThread(target=run_add_utterance, args=(str(labeled_example_utterance),train))
-        t1.start()
-        # t1.join()
-        result = t1.get_result()
-        if result == -1:
-            Utterance.objects.filter()
+        try:
+            username = request.POST.get("username")
+            tgt_user = User.objects.filter(username = username).first()
+            if tgt_user == None:
+                return JsonResponse({
+                    'code': 400,
+                    'data': "user does not exist"
+                }, status=400)
+            process = tgt_user.process_user.last()
+            gen_sendlog('add_utterance', request, process)
+            print(process.intent)
+            try:
+                intentParam = Intent.objects.filter(name = process.intent).first().entity
+            except:
+                return gen_response(400,"intent does not exist", process)
+            intentParam = ast.literal_eval(intentParam)
+            matchedParam = process.matchedEntity
+            matchedParam = ast.literal_eval(matchedParam)
+            labeled_example_utterance = {}
+            labeled_example_utterance['text'] = process.sentence
+            labeled_example_utterance['intentName'] = process.intent
+            labeled_example_utterance['entityLabels'] = []
+            for i in range(len(list(intentParam.keys()))):
+                param = list(intentParam.keys())[i]
+                if intentParam[param] != 0:
+                    labeled_example_utterance['entityLabels'].append({})
+                    labeled_example_utterance['entityLabels'][i]['startCharIndex'] = 0
+                    labeled_example_utterance['entityLabels'][i]['endCharIndex'] = len(process.sentence)-1
+                    labeled_example_utterance['entityLabels'][i]['entityName'] = param
+                    labeled_example_utterance['entityLabels'][i]['children'] = []
+                    for childParam in intentParam[param]:
+                        if childParam in matchedParam.keys():
+                            labeled_example_utterance['entityLabels'][i]['children'].append({
+                                "startCharIndex": matchedParam[childParam]['startIndex'],
+                                "endCharIndex": matchedParam[childParam]['endIndex'],
+                                "entityName": childParam,
+                            })
+                        else:
+                            return gen_response(400, childParam + 'is not matched', process)
+            Utterance.objects.create(intent = Intent.objects.filter(name = process.intent).first(), utterance = labeled_example_utterance)
+            no_add = 0
+            train = False
+            for utterance in reversed(Utterance.objects.all()):
+                if utterance.isAdd == 0:
+                    no_add += 1
+                    if no_add == 5:  # TODO add this to configratiion file
+                        train = True
+                        print('tttt')
+                        for utterance in reversed(Utterance.objects.all()):
+                            utterance.isAdd = 1
+                            utterance.save()
+                            no_add -= 1
+                            if no_add == 0:
+                                break
+                else:
+                    break
+            t1 = MyThread(target=run_add_utterance, args=(str(labeled_example_utterance),train))
+            t1.start()
+            # t1.join()
+            result = t1.get_result()
+            if result == -1:
+                return gen_response(400, "thread error", process)
+            return gen_response(200, "success", process)
+        except:
             return JsonResponse({
-            'code': 400,
-            'data': "thread error",
-        }, status=400
-        )
-        return JsonResponse({
-            'code': 200,
-            'data': "success",
-        }, status=200
-        )
+                'code': 400,
+                'data': "post error"
+            }, status=400
+            )
     else:
         return JsonResponse({
             'code': 400,
@@ -274,16 +300,30 @@ def add_utterance(request):
 @csrf_exempt
 def get_matchedParamInfo(request):
     if request.method == 'POST':
-        username = request.POST.get("username")
-        tgt_user = User.objects.filter(username = username).first()
-        process = tgt_user.process_user.last()
-        intent = process.intent
-        intentParam = Intent.objects.filter(name = intent).first().entity
-        intentParamList = getIntentParamList(intentParam)
-        return JsonResponse({
-            'code': 200,
-            'data': [intentParamList, getMatchedEntityInfo(process.matchedEntity, intentParamList)]
-        }, status=200)
+        try:
+            username = request.POST.get("username")
+            tgt_user = User.objects.filter(username = username).first()
+            if tgt_user == None:
+                return JsonResponse({
+                    'code': 400,
+                    'data': "user does not exist"
+                }, status=400)
+            process = tgt_user.process_user.last()
+            gen_sendlog('get_matchedParam', request, process)
+            intent = process.intent
+            try:
+                intentParam = Intent.objects.filter(name = intent).first().entity
+            except:
+                return gen_response(400, "intent does not exist", process)
+            intentParamList = getIntentParamList(intentParam)
+            print('hi')
+            return gen_response(200, [intentParamList, getMatchedEntityInfo(process.matchedEntity, intentParamList)], process)
+        except:
+            return JsonResponse({
+                'code': 400,
+                'data': "post error"
+            }, status=400
+            )
     else:
         return JsonResponse({
             'code': 400,

@@ -6,7 +6,7 @@ from BASE_editor import BASE_editor
 from azure.cognitiveservices.language.luis.authoring import LUISAuthoringClient
 from msrest.authentication import CognitiveServicesCredentials
 import sys, time
-# sys.path.append("..")
+sys.path.append("..")
 from configuration import Config
 
 
@@ -166,6 +166,7 @@ class LUIS_editor(BASE_editor):
         self.client.apps.publish(self.config.app_id, self.config.version_id, is_staging=False)
 
 
-# luis_editor = LUIS_editor()
-# labeled_example_utterance = {'text': '我要预约明天综体的羽毛球馆', 'intentName': '体育馆预约', 'entityLabels': [{'startCharIndex': 0, 'endCharIndex': 12, 'entityName': '体育馆', 'children': [{'startCharIndex': 6, 'endCharIndex': 7, 'entityName': '体育馆名称'}, {'startCharIndex': 9, 'endCharIndex': 12, 'entityName': '体育场地'}]}]}
-# luis_editor.add_example_utterance(labeled_example_utterance)
+luis_editor = LUIS_editor()
+labeled_example_utterance = {'text': '我要预约明天综体的羽毛球馆hh', 'intentName': '体育馆预约', 'entityLabels': [{'startCharIndex': 0, 'endCharIndex': 12, 'entityName': '体育馆', 'children': [{'startCharIndex': 6, 'endCharIndex': 7, 'entityName': '体育馆名称'}, {'startCharIndex': 9, 'endCharIndex': 12, 'entityName': '体育场地'}]}]}
+luis_editor.add_example_utterance(labeled_example_utterance)
+print('yes')

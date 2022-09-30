@@ -3,7 +3,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 os.chdir(basedir)
 sys.path.append(basedir)
 from BASE_strategy import BASE
-# sys.path.append("..")
+sys.path.append("..")
 # from .. import configuration
 from configuration import Config
 from msrest.authentication import CognitiveServicesCredentials
@@ -142,7 +142,7 @@ class LUIS(BASE):
         return word_location
         
 
-# luis = LUIS("我要预约八月十号的综体羽毛球馆。")
+# luis = LUIS("出校")
 
 # luis.predict()
 

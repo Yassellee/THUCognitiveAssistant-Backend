@@ -92,7 +92,7 @@ def add_Param(request):
     for item in content:
         if content[item] is not True:
             failedParam.append(item)
-    return failedParam
+    return failedParam, process
 
 
 

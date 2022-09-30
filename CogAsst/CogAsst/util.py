@@ -3,11 +3,13 @@ from Intent.models import *
 from User.models import *
 from Intent.utils import *
 from User.utils import *
-from strategy.LUIS_strategy import *
+from configuration import Config
 import codecs
 import csv
 import time
 import threading
+from django.http import JsonResponse
+from django.utils import timezone
 
 
 # # query parameters that didn't matched and generate reply
@@ -97,6 +99,12 @@ import threading
 #     return feedback
 
 
+def get_cogSt(message):
+    config = Config()    
+    if config.cognitive_strategy == "LUIS":
+        from strategy.LUIS_strategy import LUIS
+        return LUIS(message)
+    
 
 
 def addIntent2db():
@@ -115,22 +123,25 @@ def addIntent2db():
 
 def update_message(id, message):
     tgt_user = User.objects.filter(username = id).first()
-    luis = LUIS(message)
-    luis.predict()
-    print(luis.recognize_intent())
-    intentslist = luis.recognize_intent()
-    inputTokenize = luis.segment_sentence()
-    matchedEntity = luis.extract_entity()
-    Process.objects.create(user = tgt_user, sentence = message, intentslist = intentslist, inputTokenize = inputTokenize, matchedEntity = matchedEntity)
-    return intentslist
+    if tgt_user == None:
+        tgt_user = User.objects.create(username = id)
+    cogSt = get_cogSt(message)
+    cogSt.predict()
+    print(cogSt.recognize_intent())
+    intentslist = cogSt.recognize_intent()
+    inputTokenize = cogSt.segment_sentence()
+    matchedEntity = cogSt.extract_entity()
+    process = Process.objects.create(user = tgt_user, sentence = message, intentslist = intentslist, inputTokenize = inputTokenize, matchedEntity = matchedEntity)
+    return intentslist, process
 
 
 def getIntentParamList(intentparam):
     result = []
+    # print(intentparam)
     intentparam = ast.literal_eval(intentparam)
     keys = list(intentparam.keys())
-    print(intentparam)
-    print(keys)
+    # print(intentparam)
+    # print(keys)
     for key in keys:
         if intentparam[key]!=0:
             if intentparam[key] != []:
@@ -186,7 +197,17 @@ def getMatchedEntityInfo(matchedEntity, intentParamList):
                     try:
                         result.append(matchedEntity['datetimeV2'][0]['values'][0]['timex'])
                     except:
-                        result.append(matchedEntity['datetimeV2'])
+                        result.append(matchedEntity['datetimeV2']['text'])
+                elif keyParam == "personName" or keyParam == "phoneNumber":
+                    try:
+                        result.append(matchedEntity[keyParam][0])
+                    except:
+                        result.append(matchedEntity[keyParam]['text'])
+                elif keyParam == "money" :
+                    try:
+                        result.append(str(matchedEntity['money'][0]['number']))
+                    except:
+                        result.append(str(matchedEntity['money']['text']))
                 else:
                     result.append(matchedEntity[key]['text'])
         if len(result) <  i+1:
@@ -253,3 +274,31 @@ def limit_decor(limit_time):
         return run
 
     return functions
+
+
+def gen_response(code, data, pro):
+    print(timezone.now())
+    pro.endTime = timezone.now()
+    pro.save()
+    Log.objects.create(process = pro, message = str({'code': code, 'data': data}), type = 1)
+    return JsonResponse({
+            'code': code,
+            'data': data
+        }, status=code)
+
+
+def gen_sendlog(interface, request,pro):
+    pro.endTime = timezone.now()
+    pro.save()
+    data={}
+    if 'username' in request.POST:
+        data['username'] = request.POST.get("username")
+    if 'intent' in request.POST:
+        data['intent'] = request.POST.get("intent")
+    if 'message' in request.POST:
+        data['message'] = request.POST.get("message")
+    if 'position' in request.POST:
+        data['position'] = request.POST.get("position")
+    if 'content' in request.POST:
+        data['content'] = request.POST.get("content")
+    Log.objects.create(process = pro, message = str({'interface':interface, 'data':data}), type = 2)

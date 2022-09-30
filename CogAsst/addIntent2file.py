@@ -26,8 +26,8 @@ def addIntent2file():
     csv_writer.writerow(['淘宝清空购物车', "{'淘宝': []}", "{}"])
     csv_writer.writerow(['申请出校', "{'出校': ['班级', '事由类型', '事由描述', '往来地点'], 'datetimeV2': 0, 'phoneNumber': 0}", "{'事由类型':['出校科研', '出校就医', '出校实习', '出校其他']}"])
     csv_writer.writerow(['电表充值', "{'电费': [], 'money': 0}", "{}"])
-    csv_writer.writerow(['淘宝询问客服', "{'淘宝': ['店铺名称', '消息内容']", "{}"])
-    csv_writer.writerow(['淘宝进入店铺', "{'淘宝': ['店铺名称']", "{}"])
+    csv_writer.writerow(['淘宝询问客服', "{'淘宝': ['店铺名称', '消息内容']}", "{}"])
+    csv_writer.writerow(['淘宝进入店铺', "{'淘宝': ['店铺名称']}", "{}"])
     file.close()
 
 
