@@ -140,7 +140,7 @@ class LUIS(BASE):
         return word_location
         
 
-luis = LUIS("我要充电费")
+luis = LUIS("给张三转账50块钱")
 
 luis.predict()
 
