@@ -28,6 +28,7 @@ def addIntent2file():
     csv_writer.writerow(['电表充值', "{'电费': [], 'money': 0}", "{}"])
     csv_writer.writerow(['淘宝询问客服', "{'淘宝': ['店铺名称', '消息内容']}", "{}"])
     csv_writer.writerow(['淘宝进入店铺', "{'淘宝': ['店铺名称']}", "{}"])
+    csv_writer.writerow(['None', "{}", "{}"])
     file.close()
 
 

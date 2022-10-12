@@ -123,15 +123,18 @@ def addIntent2db():
 
 def update_message(id, message):
     tgt_user = User.objects.filter(username = id).first()
-    if tgt_user == None:
-        tgt_user = User.objects.create(username = id)
     cogSt = get_cogSt(message)
     cogSt.predict()
     print(cogSt.recognize_intent())
     intentslist = cogSt.recognize_intent()
     inputTokenize = cogSt.segment_sentence()
     matchedEntity = cogSt.extract_entity()
-    process = Process.objects.create(user = tgt_user, sentence = message, intentslist = intentslist, inputTokenize = inputTokenize, matchedEntity = matchedEntity)
+    process = tgt_user.process_user.last()
+    process.sentence = message
+    process.intentslist = intentslist
+    process.inputTokenize = inputTokenize
+    process.matchedEntity = matchedEntity
+    process.save()
     return intentslist, process
 
 
@@ -302,3 +305,31 @@ def gen_sendlog(interface, request,pro):
     if 'content' in request.POST:
         data['content'] = request.POST.get("content")
     Log.objects.create(process = pro, message = str({'interface':interface, 'data':data}), type = 2)
+
+
+def get_8choices():
+    allintents_utterance = []
+    allintents_utterance = [(intent.utterance_intent.count(), intent.name) for intent in Intent.objects.all()  if intent.name != "None"]
+    print(allintents_utterance)
+    allintents_utterance = sorted(allintents_utterance)
+    choices8 = [i[1] for i in allintents_utterance[:8]]
+    return choices8, get_choices_Score(allintents_utterance)
+
+
+def get_choices_Score(allintents_utterance):
+    sum = 0
+    for num in allintents_utterance:
+        sum += num[0]
+    print(sum)
+    ave = sum / len(allintents_utterance)
+    scores = []
+    for i in range(8):
+        score = 3
+        if allintents_utterance[i][0] != 0:
+            score = ave/float(allintents_utterance[i][0])
+        if score > 3: 
+            score = 3
+        scores.append(score)
+    print(scores)
+    return scores
+

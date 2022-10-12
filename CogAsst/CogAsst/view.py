@@ -48,6 +48,12 @@ def get_intentlist(request):
     if request.method == 'POST':
         try:
             username = request.POST.get("username")
+            tgt_user = User.objects.filter(username = id).first()
+            if tgt_user == None:
+                return JsonResponse({
+                    'code': 400,
+                    'data': "user does not exist"
+                }, status=400)
             message = request.POST.get("message")
             intentlist, process = update_message(username, message)
             print(intentlist)
@@ -318,6 +324,31 @@ def get_matchedParamInfo(request):
             intentParamList = getIntentParamList(intentParam)
             print('hi')
             return gen_response(200, [intentParamList, getMatchedEntityInfo(process.matchedEntity, intentParamList)], process)
+        except:
+            return JsonResponse({
+                'code': 400,
+                'data': "post error"
+            }, status=400
+            )
+    else:
+        return JsonResponse({
+            'code': 400,
+            'data': "method error"
+        }, status=400)
+
+
+@csrf_exempt
+def get_choices(request):
+    if request.method == 'POST':
+        try:
+            username = request.POST.get("username")
+            tgt_user = User.objects.filter(username = username).first()
+            if tgt_user == None:
+                tgt_user = User.objects.create(username = id)
+            process = Process.objects.create(user = tgt_user)
+            gen_sendlog('get_choices', request, process)
+            choices, choices_socre = get_8choices()
+            return gen_response(200, [choices, choices_socre], process)
         except:
             return JsonResponse({
                 'code': 400,

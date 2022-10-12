@@ -13,5 +13,6 @@ urlpatterns = [
     path('get_inputTokenize', view.get_inputTokenize),
     path('add_params/', view.add_params),
     path('init', view.init),
-    path('add_utterance/', view.add_utterance)
+    path('add_utterance/', view.add_utterance),
+    path('get_choices/', view.get_choices)
 ]
