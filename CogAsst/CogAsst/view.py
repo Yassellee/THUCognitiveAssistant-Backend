@@ -347,8 +347,8 @@ def get_choices(request):
                 tgt_user = User.objects.create(username = id)
             process = Process.objects.create(user = tgt_user)
             gen_sendlog('get_choices', request, process)
-            choices, choices_socre = get_8choices()
-            return gen_response(200, [choices, choices_socre], process)
+            choices, choices_socre = get_5choices()
+            return gen_response(200, get_choice_entities(choices, choices_socre), process)
         except:
             return JsonResponse({
                 'code': 400,

@@ -10,7 +10,6 @@ from msrest.authentication import CognitiveServicesCredentials
 from azure.cognitiveservices.language.luis.runtime import LUISRuntimeClient
 import jieba
 
-
 class LUIS(BASE):
     def __init__(self, input_sentence):
         """construction funciton for LUIS
@@ -107,20 +106,21 @@ class LUIS(BASE):
             if is_contains_chinese(key):
                 if isinstance(entities.get(key)[0], dict):
                     current_instance = entities.get(key)[0].get("$instance")
-                    for instance_key in current_instance:
-                        dict_to_process = current_instance.get(instance_key)[0]
-                        dict_to_process["endIndex"] = dict_to_process["startIndex"]+dict_to_process["length"]-1
-                        try:
-                            pop_with_check("type", dict_to_process)
-                            pop_with_check("length", dict_to_process)
-                            pop_with_check("score", dict_to_process)
-                            pop_with_check("modelTypeId", dict_to_process)
-                            pop_with_check("modelType", dict_to_process)
-                            pop_with_check("recognitionSources", dict_to_process)
-                        except:
-                            raise KeyError
-                    
-                        ret_dict[instance_key] = dict_to_process
+                    if current_instance:
+                        for instance_key in current_instance:
+                            dict_to_process = current_instance.get(instance_key)[0]
+                            dict_to_process["endIndex"] = dict_to_process["startIndex"]+dict_to_process["length"]-1
+                            try:
+                                pop_with_check("type", dict_to_process)
+                                pop_with_check("length", dict_to_process)
+                                pop_with_check("score", dict_to_process)
+                                pop_with_check("modelTypeId", dict_to_process)
+                                pop_with_check("modelType", dict_to_process)
+                                pop_with_check("recognitionSources", dict_to_process)
+                            except:
+                                raise KeyError
+                        
+                            ret_dict[instance_key] = dict_to_process
             else:
                 ret_dict[key] = entities[key]
 
@@ -142,7 +142,7 @@ class LUIS(BASE):
         return word_location
         
 
-# luis = LUIS("出校")
+# luis = LUIS("打电话")
 
 # luis.predict()
 

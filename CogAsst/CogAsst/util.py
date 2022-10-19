@@ -1,3 +1,5 @@
+from tokenize import Double
+from typing import List
 from django.db import models
 from Intent.models import *
 from User.models import *
@@ -10,6 +12,7 @@ import time
 import threading
 from django.http import JsonResponse
 from django.utils import timezone
+from math import sqrt
 
 
 # # query parameters that didn't matched and generate reply
@@ -307,29 +310,45 @@ def gen_sendlog(interface, request,pro):
     Log.objects.create(process = pro, message = str({'interface':interface, 'data':data}), type = 2)
 
 
-def get_8choices():
+def get_5choices():
     allintents_utterance = []
     allintents_utterance = [(intent.utterance_intent.count(), intent.name) for intent in Intent.objects.all()  if intent.name != "None"]
     print(allintents_utterance)
     allintents_utterance = sorted(allintents_utterance)
-    choices8 = [i[1] for i in allintents_utterance[:8]]
-    return choices8, get_choices_Score(allintents_utterance)
+    choices5 = [i[1] for i in allintents_utterance[:5]]
+    return choices5, get_choices_Score(allintents_utterance)
 
 
 def get_choices_Score(allintents_utterance):
-    sum = 0
-    for num in allintents_utterance:
-        sum += num[0]
+    sum = Utterance.objects.count()
+    sum = sum - Intent.objects.filter(name = "None").first().utterance_intent.count()
     print(sum)
     ave = sum / len(allintents_utterance)
     scores = []
-    for i in range(8):
-        score = 3
+    for i in range(5):
+        score = 100
         if allintents_utterance[i][0] != 0:
-            score = ave/float(allintents_utterance[i][0])
-        if score > 3: 
-            score = 3
-        scores.append(score)
+            score = float(ave)/float(allintents_utterance[i][0])
+            score = 100*sqrt(score)
+            if score >100:
+                score = 100
+        scores.append(str(round(score,1)))
     print(scores)
     return scores
 
+
+def get_choice_entities(choices, choices_socre):
+    result = [choices, choices_socre]
+    for intent in choices:
+        entities = ast.literal_eval(Intent.objects.filter(name = intent).first().entity)
+        string = ""
+        print(list(entities.keys()))
+        for entity in list(entities.keys()):
+            print(type(entities[entity]))
+            if isinstance(entities[entity],list):
+                for i in entities[entity]:
+                    string +=  i + '、'
+            else:
+                string +=  entity + '、'
+        result.append(string[:-1])
+    return result
