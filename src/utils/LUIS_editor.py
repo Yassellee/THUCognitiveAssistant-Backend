@@ -160,3 +160,5 @@ class LUIS_editor(BASE_editor):
         self.client.apps.update_settings(self.config.app_id, is_public=True)
 
         self.client.apps.publish(self.config.app_id, self.config.version_id, is_staging=False)
+
+

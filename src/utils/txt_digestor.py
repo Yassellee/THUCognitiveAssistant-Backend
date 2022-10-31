@@ -1,7 +1,7 @@
-import codecs, re
+import codecs, re, json
 
 
-input_file_path = "..\\..\\data\\test.txt"
+input_file_path = "..\\..\\data\\local_luis.txt"
 
 
 def digest_file(file_path):
@@ -107,11 +107,14 @@ def digest_intent_dict(intent_dict):
 
     for intent in intent_dict:
         first_sentence = intent_dict[intent][0]
-        entity_with_content_list = re.split("<|>", first_sentence)
-        entity_with_content = []
-        for i in range(len(entity_with_content_list)):
-            if i%2 == 1:
-                entity_with_content.append(entity_with_content_list[i])
+        entity_with_content = re.compile(r"<.*?>").findall(first_sentence)
+        for i in range(len(entity_with_content)):
+            entity_with_content[i] = entity_with_content[i].strip("<").strip(">")
+        # entity_with_content_list = re.split("<|>", first_sentence)
+        # entity_with_content = []
+        # for i in range(len(entity_with_content_list)):
+        #     if i%2 == 1:
+        #         entity_with_content.append(entity_with_content_list[i])
         for entity in entity_with_content:
             current_entity = entity.split('=')[0]
             entity_list.append(current_entity)
@@ -123,11 +126,9 @@ def digest_intent_dict(intent_dict):
                 entity2feature[current_entity] = current_feature
 
         for sentence in intent_dict[intent]:
-            local_entity_with_content_list = re.split("<|>", sentence)
-            local_entity_with_content = []
-            for i in range(len(local_entity_with_content_list)):
-                if i%2 == 1:
-                    local_entity_with_content.append(local_entity_with_content_list[i])
+            local_entity_with_content = re.compile(r"<.*?>").findall(sentence)
+            for i in range(len(local_entity_with_content)):
+                local_entity_with_content[i] = local_entity_with_content[i].strip("<").strip(">")
             for entity in local_entity_with_content:
                 current_content = re.split(r"[=, |]", entity)[1]
                 sentence = sentence.replace("<"+entity+">", current_content)
@@ -157,10 +158,22 @@ def main():
     lines = digest_file(input_file_path)
     intent_dict = digest_intent(lines)
     intent2entity, labeled_utterances, entity2feature, entity_list = digest_intent_dict(intent_dict)
-    print("intent2entity is "+str(intent2entity))
-    print("labeled_utterances is "+str(labeled_utterances))
-    print("entity2feature is "+str(entity2feature))
-    print("entity_list is "+str(entity_list))
+
+    with codecs.open("..\\..\\data\\intent2entity.json", 'w', 'utf-8') as f:
+        json.dump(intent2entity, f, ensure_ascii=False, indent=4)
+    with codecs.open("..\\..\\data\\labeled_utterances.json", 'w', 'utf-8') as f:
+        json.dump(labeled_utterances, f, ensure_ascii=False, indent=4)
+    with codecs.open("..\\..\\data\\entity2feature.json", 'w', 'utf-8') as f:
+        json.dump(entity2feature, f, ensure_ascii=False, indent=4)
+    with codecs.open("..\\..\\data\\entity_list.json", 'w', 'utf-8') as f: 
+        json.dump(entity_list, f, ensure_ascii=False, indent=4)
+    print(intent2entity)
+    print('\n')
+    print(labeled_utterances)
+    print('\n')
+    print(entity2feature)
+    print('\n')
+    print(entity_list)
 
 
 if __name__ == "__main__":

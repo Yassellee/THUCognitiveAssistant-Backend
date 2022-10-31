@@ -38,14 +38,24 @@ class LUIS(BASE):
             dict: a dict in the following format
             {
             "top_intent": <name of the intent that has the highest confidence score>,
-            "intents": [<Intent1>, <Intent2>], alist of intents ranked by their confidence scores
+            "intents": [
+                {
+                    "intent": <name of the intent>,
+                    "score": <confidence score>
+                },
+                {
+                    "intent": <name of the intent>,
+                    "score": <confidence score>
+                }
+            ]
         """
         
 
         list_of_intents = []
 
+
         for intent in self.prediction_response.prediction.intents:
-            list_of_intents.append(intent)
+            list_of_intents.append({"intent": intent, "score": self.prediction_response.prediction.intents.get(intent).score})
 
         return {"top_intent": self.prediction_response.prediction.top_intent,
                 "intents": list_of_intents}
@@ -133,16 +143,12 @@ class LUIS(BASE):
             dict: a dict of words with their location segmented from user's input in the following format
             {<word>: [<start_location>, <end_location>]}
         """
-        word_location = {}
-        result = jieba.tokenize(self.input_sentence)
-        for token in result:
-            word_location[token[0]] = [token[1], token[2]]
+        pass
         
-        return word_location
         
 
 luis = LUIS("打电话")
 
 luis.predict()
 
-print(luis.extract_entity())
+print(luis.recognize_intent())
