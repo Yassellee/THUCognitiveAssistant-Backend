@@ -8,9 +8,13 @@ class ProcessAdmin(admin.ModelAdmin):
     readonly_fields = ('startTime','endTime')
 
 class LogAdmin(admin.ModelAdmin):
-    list_display =['process','sentence','message', 'type']
+    list_display =['process','process_id','sentence','message', 'type']
     fields = ['process','message', 'type']
 
+class UserAdmin(admin.ModelAdmin):
+    list_display = ['username','process_num','show_score']
+    
+
 admin.site.register(models.Process, ProcessAdmin)
-admin.site.register(models.User)
+admin.site.register(models.User, UserAdmin)
 admin.site.register(models.Log, LogAdmin)

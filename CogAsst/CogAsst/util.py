@@ -128,17 +128,21 @@ def update_message(id, message):
     tgt_user = User.objects.filter(username = id).first()
     cogSt = get_cogSt(message)
     cogSt.predict()
-    print(cogSt.recognize_intent())
-    intentslist = cogSt.recognize_intent()
-    inputTokenize = cogSt.segment_sentence()
+    intentslist_ = cogSt.recognize_intent()
+    # inputTokenize = cogSt.segment_sentence()
     matchedEntity = cogSt.extract_entity()
     process = tgt_user.process_user.last()
     process.sentence = message
-    process.intentslist = intentslist
-    process.inputTokenize = inputTokenize
+    process.intentslist = intentslist_
+    # process.inputTokenize = inputTokenize
     process.matchedEntity = matchedEntity
+    # print(process.inputTokenize)
+    # print(process.matchedEntity)
+    # print(process.sentence)
+    print(process.intentslist)
     process.save()
-    return intentslist, process
+    # intentslist_ = ''
+    return intentslist_, process
 
 
 def getIntentParamList(intentparam):
@@ -322,14 +326,17 @@ def get_5choices():
 def get_choices_Score(allintents_utterance):
     sum = Utterance.objects.count()
     sum = sum - Intent.objects.filter(name = "None").first().utterance_intent.count()
-    print(sum)
+    # print(sum)
+    # print(len(allintents_utterance))
     ave = sum / len(allintents_utterance)
     scores = []
     for i in range(5):
         score = 100
         if allintents_utterance[i][0] != 0:
+            # print(ave)
+            # print(allintents_utterance[i][0])
             score = float(ave)/float(allintents_utterance[i][0])
-            score = 100*sqrt(score)
+            score = 60*sqrt(score)
             if score >100:
                 score = 100
         scores.append(str(round(score,1)))
@@ -352,3 +359,18 @@ def get_choice_entities(choices, choices_socre):
                 string +=  entity + '、'
         result.append(string[:-1])
     return result
+
+
+def get_intentscore(intent):
+    sum = Utterance.objects.count()
+    sum = sum - Intent.objects.filter(name = "None").first().utterance_intent.count()
+    ave = sum / (Intent.objects.count()-1)
+    utterances = float(Intent.objects.filter(name = intent).first().utterance_intent.count())
+    if utterances == 0:
+        score = 100
+    else:
+        score = 60*sqrt(float(ave)/utterances)
+    if score > 100:
+        return 100
+    else:
+        return score

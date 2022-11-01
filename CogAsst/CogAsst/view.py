@@ -1,3 +1,4 @@
+from symbol import break_stmt
 from strategy.LUIS_strategy import *
 from utils.LUIS_editor import *
 from CogAsst.util  import *
@@ -6,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from strategy.LUIS_strategy import *
 import time
+import copy
 
 
 @csrf_exempt
@@ -55,10 +57,12 @@ def get_intentlist(request):
                     'data': "user does not exist"
                 }, status=400)
             message = request.POST.get("message")
-            intentlist, process = update_message(username, message)
-            print(intentlist)
-            print(type(intentlist))
-            data = str({"intents": intentlist})
+            intentlist_, process = update_message(username, message)
+            # print(type(intentlist_))
+            print(intentlist_['intents'])
+            ilist = copy.deepcopy(intentlist_)  # python 的赋值是引用，a变b也变
+            ilist['intents'] = [intentlist_['intents'][i]['intent'] for i in range(len(intentlist_['intents']))]
+            data = str({"intents": ilist})
             gen_sendlog('get_intentlist', request, process)
             return gen_response(200, data, process)
         except:
@@ -98,6 +102,7 @@ def get_intentParam(request):
                 }, status=400)
             process = tgt_user.process_user.last()
             process.intent = intent
+            process.intentscore = round(get_intentscore(intent),4)
             process.save()
             gen_sendlog('get_intentParam', request, process)
             try:
@@ -175,6 +180,7 @@ def add_params(request):
     if request.method == 'POST':
         try: 
             failedParam, process =  add_Param(request)
+            print('----')
             gen_sendlog('add_params', request, process)
             if failedParam == []:
                 return gen_response(200, "success", process)
@@ -244,6 +250,7 @@ def add_utterance(request):
             intentParam = ast.literal_eval(intentParam)
             matchedParam = process.matchedEntity
             matchedParam = ast.literal_eval(matchedParam)
+            # 构建符合格式的utterance
             labeled_example_utterance = {}
             labeled_example_utterance['text'] = process.sentence
             labeled_example_utterance['intentName'] = process.intent
@@ -266,6 +273,7 @@ def add_utterance(request):
                         else:
                             return gen_response(400, childParam + 'is not matched', process)
             Utterance.objects.create(intent = Intent.objects.filter(name = process.intent).first(), utterance = labeled_example_utterance)
+            # 每5次添加一下
             no_add = 0
             train = False
             for utterance in reversed(Utterance.objects.all()):
@@ -282,6 +290,25 @@ def add_utterance(request):
                                 break
                 else:
                     break
+            # 添加分数累计
+            print('----')
+            intentlist = ast.literal_eval(process.intentslist)['intents']
+            print(intentlist)
+            intentscore = 0
+            for i in intentlist:
+                if i['intent'] == process.intent:
+                    intentscore = i['score']
+                    break
+            if intentscore > 0 :
+                intentscore = 1/intentscore
+            if intentscore > 5:
+                intentscore = 5
+            elif intentscore < 1.1111:
+                intentscore = 0.9
+            process.score = round(float(process.intentscore * intentscore)/100.0, 4)
+            print(process.score)
+            process.save()
+            print("add score")
             t1 = MyThread(target=run_add_utterance, args=(str(labeled_example_utterance),train))
             t1.start()
             # t1.join()
@@ -345,10 +372,10 @@ def get_choices(request):
             tgt_user = User.objects.filter(username = username).first()
             if tgt_user == None:
                 tgt_user = User.objects.create(username = id)
+            choices, choices_score = get_5choices()
             process = Process.objects.create(user = tgt_user)
             gen_sendlog('get_choices', request, process)
-            choices, choices_socre = get_5choices()
-            return gen_response(200, get_choice_entities(choices, choices_socre), process)
+            return gen_response(200, get_choice_entities(choices, choices_score), process)
         except:
             return JsonResponse({
                 'code': 400,

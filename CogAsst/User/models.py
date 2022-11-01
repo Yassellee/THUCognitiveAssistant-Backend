@@ -1,12 +1,25 @@
 # from time import timezone
+import re
 from django.db import models
 from django.utils import timezone
 
 class User(models.Model):
     username = models.CharField(max_length=20, default="")
+    score = models.IntegerField(default = 0)
 
     def __str__(self):
         return self.username
+
+
+    def process_num(self):
+        return self.process_user.all().count()
+    
+    def show_score(self):
+        processes = self.process_user.all()
+        res = 0
+        for i in processes:
+            res += i.score
+        return res
 
 # class matchedEntity(models.Model):
 #     matchedEntity = models.TextField(max_length=300, default="")
@@ -16,11 +29,14 @@ class Process(models.Model):
     user = models.ForeignKey(User, related_name='process_user', on_delete=models.CASCADE) 
     sentence = models.CharField(max_length=20, default="", blank = True)
     # state = models.IntegerField(default=0)
+    score = models.FloatField(default = 0)
     intent = models.CharField(max_length=20, default="", blank = True)
-    intentslist = models.CharField(max_length=300, default="", blank = True)
-    inputTokenize = models.TextField(max_length=300, default="", blank = True)
-    matchedEntity = models.TextField(max_length=300, default="", blank = True)
+    intentscore = models.FloatField(default = 0)
+    intentslist = models.TextField(max_length=3000, default="", blank = True)
+    inputTokenize = models.TextField(max_length=3000, default="", blank = True)
+    matchedEntity = models.TextField(max_length=3000, default="", blank = True)
     endTime = models.DateTimeField(default = timezone.now, blank = True)
+    # choices = models.TextField(max_length=300, default="", blank = True)
     startTime = models.DateTimeField(auto_now_add = True)
     # paramToAsk = models.TextField(max_length=300, default="", blank = True)
 
@@ -45,6 +61,9 @@ class Log(models.Model):
 
     def sentence(self):
         return self.process.sentence
+
+    def process_id(self):
+        return self.process.id
 
 
 
