@@ -1,0 +1,165 @@
+{"content": "我想通过京东买药购买消毒酒精", "result_list": [{"text": "消毒酒精", "start": 10, "end": 14}], "prompt": "药品名称"}
+{"content": "我想查询已订购微波炉的发货信息", "result_list": [{"text": "微波炉", "start": 7, "end": 10}], "prompt": "商品类别"}
+{"content": "我想查询微波炉的价格", "result_list": [{"text": "微波炉", "start": 4, "end": 7}], "prompt": "商品类别"}
+{"content": "我想查询微波炉的价格", "result_list": [{"text": "价格", "start": 8, "end": 10}], "prompt": "商品参数"}
+{"content": "我想查看小明通过顺丰来的快递位置", "result_list": [{"text": "小明", "start": 4, "end": 6}], "prompt": "人名"}
+{"content": "我想查看小明通过顺丰来的快递位置", "result_list": [{"text": "顺丰", "start": 8, "end": 10}], "prompt": "快递公司"}
+{"content": "我想购买2022年12月第三期的双色球机选10注", "result_list": [{"text": "2022年12月", "start": 4, "end": 12}], "prompt": "时间"}
+{"content": "我想购买2022年12月第三期的双色球机选10注", "result_list": [{"text": "第三期", "start": 12, "end": 15}], "prompt": "彩票期数"}
+{"content": "我想购买2022年12月第三期的双色球机选10注", "result_list": [{"text": "双色球", "start": 16, "end": 19}], "prompt": "类型"}
+{"content": "我想购买2022年12月第三期的双色球机选10注", "result_list": [{"text": "10注", "start": 21, "end": 24}], "prompt": "注数"}
+{"content": "我想让你还250元的欠款", "result_list": [{"text": "我想让你还250元的欠款", "start": 0, "end": 12}], "prompt": "消息内容"}
+{"content": "我想给店主发送你好的消息", "result_list": [{"text": "你好", "start": 7, "end": 9}], "prompt": "消息内容"}
+{"content": "我想将选定的长款男风衣放进购物车", "result_list": [{"text": "长款男风衣", "start": 6, "end": 11}], "prompt": "商品类别"}
+{"content": "我想去紫荆食堂，在2022年12月23日与你一起吃饭", "result_list": [{"text": "我想去紫荆食堂，在2022年12月23日与你一起吃饭", "start": 0, "end": 26}], "prompt": "消息内容"}
+{"content": "我想购买2022年12月26日的两张北京到武汉的商务仓高铁票", "result_list": [{"text": "2022年12月26日", "start": 4, "end": 15}], "prompt": "时间"}
+{"content": "我想购买2022年12月26日的两张北京到武汉的商务仓高铁票", "result_list": [{"text": "两张", "start": 16, "end": 18}], "prompt": "数量"}
+{"content": "我想购买2022年12月26日的两张北京到武汉的商务仓高铁票", "result_list": [{"text": "北京", "start": 18, "end": 20}], "prompt": "起始站"}
+{"content": "我想购买2022年12月26日的两张北京到武汉的商务仓高铁票", "result_list": [{"text": "武汉", "start": 21, "end": 23}], "prompt": "终点站"}
+{"content": "我想购买2022年12月26日的两张北京到武汉的商务仓高铁票", "result_list": [{"text": "商务仓", "start": 24, "end": 27}], "prompt": "等级"}
+{"content": "我想给余额宝充款2345元", "result_list": [{"text": "2345元", "start": 8, "end": 13}], "prompt": "金额"}
+{"content": "我想通过京东买药购买消毒酒精", "result_list": [], "prompt": "人名"}
+{"content": "我想通过京东买药购买消毒酒精", "result_list": [], "prompt": "商品参数"}
+{"content": "我想通过京东买药购买消毒酒精", "result_list": [], "prompt": "商品类别"}
+{"content": "我想通过京东买药购买消毒酒精", "result_list": [], "prompt": "彩票期数"}
+{"content": "我想通过京东买药购买消毒酒精", "result_list": [], "prompt": "快递公司"}
+{"content": "我想通过京东买药购买消毒酒精", "result_list": [], "prompt": "数量"}
+{"content": "我想通过京东买药购买消毒酒精", "result_list": [], "prompt": "时间"}
+{"content": "我想通过京东买药购买消毒酒精", "result_list": [], "prompt": "注数"}
+{"content": "我想通过京东买药购买消毒酒精", "result_list": [], "prompt": "消息内容"}
+{"content": "我想通过京东买药购买消毒酒精", "result_list": [], "prompt": "等级"}
+{"content": "我想通过京东买药购买消毒酒精", "result_list": [], "prompt": "类型"}
+{"content": "我想通过京东买药购买消毒酒精", "result_list": [], "prompt": "终点站"}
+{"content": "我想通过京东买药购买消毒酒精", "result_list": [], "prompt": "起始站"}
+{"content": "我想通过京东买药购买消毒酒精", "result_list": [], "prompt": "金额"}
+{"content": "我想查询已订购微波炉的发货信息", "result_list": [], "prompt": "人名"}
+{"content": "我想查询已订购微波炉的发货信息", "result_list": [], "prompt": "商品参数"}
+{"content": "我想查询已订购微波炉的发货信息", "result_list": [], "prompt": "彩票期数"}
+{"content": "我想查询已订购微波炉的发货信息", "result_list": [], "prompt": "快递公司"}
+{"content": "我想查询已订购微波炉的发货信息", "result_list": [], "prompt": "数量"}
+{"content": "我想查询已订购微波炉的发货信息", "result_list": [], "prompt": "时间"}
+{"content": "我想查询已订购微波炉的发货信息", "result_list": [], "prompt": "注数"}
+{"content": "我想查询已订购微波炉的发货信息", "result_list": [], "prompt": "消息内容"}
+{"content": "我想查询已订购微波炉的发货信息", "result_list": [], "prompt": "等级"}
+{"content": "我想查询已订购微波炉的发货信息", "result_list": [], "prompt": "类型"}
+{"content": "我想查询已订购微波炉的发货信息", "result_list": [], "prompt": "终点站"}
+{"content": "我想查询已订购微波炉的发货信息", "result_list": [], "prompt": "药品名称"}
+{"content": "我想查询已订购微波炉的发货信息", "result_list": [], "prompt": "起始站"}
+{"content": "我想查询已订购微波炉的发货信息", "result_list": [], "prompt": "金额"}
+{"content": "我想查询微波炉的价格", "result_list": [], "prompt": "人名"}
+{"content": "我想查询微波炉的价格", "result_list": [], "prompt": "彩票期数"}
+{"content": "我想查询微波炉的价格", "result_list": [], "prompt": "快递公司"}
+{"content": "我想查询微波炉的价格", "result_list": [], "prompt": "数量"}
+{"content": "我想查询微波炉的价格", "result_list": [], "prompt": "时间"}
+{"content": "我想查询微波炉的价格", "result_list": [], "prompt": "注数"}
+{"content": "我想查询微波炉的价格", "result_list": [], "prompt": "消息内容"}
+{"content": "我想查询微波炉的价格", "result_list": [], "prompt": "等级"}
+{"content": "我想查询微波炉的价格", "result_list": [], "prompt": "类型"}
+{"content": "我想查询微波炉的价格", "result_list": [], "prompt": "终点站"}
+{"content": "我想查询微波炉的价格", "result_list": [], "prompt": "药品名称"}
+{"content": "我想查询微波炉的价格", "result_list": [], "prompt": "起始站"}
+{"content": "我想查询微波炉的价格", "result_list": [], "prompt": "金额"}
+{"content": "我想查看小明通过顺丰来的快递位置", "result_list": [], "prompt": "商品参数"}
+{"content": "我想查看小明通过顺丰来的快递位置", "result_list": [], "prompt": "商品类别"}
+{"content": "我想查看小明通过顺丰来的快递位置", "result_list": [], "prompt": "彩票期数"}
+{"content": "我想查看小明通过顺丰来的快递位置", "result_list": [], "prompt": "数量"}
+{"content": "我想查看小明通过顺丰来的快递位置", "result_list": [], "prompt": "时间"}
+{"content": "我想查看小明通过顺丰来的快递位置", "result_list": [], "prompt": "注数"}
+{"content": "我想查看小明通过顺丰来的快递位置", "result_list": [], "prompt": "消息内容"}
+{"content": "我想查看小明通过顺丰来的快递位置", "result_list": [], "prompt": "等级"}
+{"content": "我想查看小明通过顺丰来的快递位置", "result_list": [], "prompt": "类型"}
+{"content": "我想查看小明通过顺丰来的快递位置", "result_list": [], "prompt": "终点站"}
+{"content": "我想查看小明通过顺丰来的快递位置", "result_list": [], "prompt": "药品名称"}
+{"content": "我想查看小明通过顺丰来的快递位置", "result_list": [], "prompt": "起始站"}
+{"content": "我想查看小明通过顺丰来的快递位置", "result_list": [], "prompt": "金额"}
+{"content": "我想购买2022年12月第三期的双色球机选10注", "result_list": [], "prompt": "人名"}
+{"content": "我想购买2022年12月第三期的双色球机选10注", "result_list": [], "prompt": "商品参数"}
+{"content": "我想购买2022年12月第三期的双色球机选10注", "result_list": [], "prompt": "商品类别"}
+{"content": "我想购买2022年12月第三期的双色球机选10注", "result_list": [], "prompt": "快递公司"}
+{"content": "我想购买2022年12月第三期的双色球机选10注", "result_list": [], "prompt": "数量"}
+{"content": "我想购买2022年12月第三期的双色球机选10注", "result_list": [], "prompt": "消息内容"}
+{"content": "我想购买2022年12月第三期的双色球机选10注", "result_list": [], "prompt": "等级"}
+{"content": "我想购买2022年12月第三期的双色球机选10注", "result_list": [], "prompt": "终点站"}
+{"content": "我想购买2022年12月第三期的双色球机选10注", "result_list": [], "prompt": "药品名称"}
+{"content": "我想购买2022年12月第三期的双色球机选10注", "result_list": [], "prompt": "起始站"}
+{"content": "我想购买2022年12月第三期的双色球机选10注", "result_list": [], "prompt": "金额"}
+{"content": "我想让你还250元的欠款", "result_list": [], "prompt": "人名"}
+{"content": "我想让你还250元的欠款", "result_list": [], "prompt": "商品参数"}
+{"content": "我想让你还250元的欠款", "result_list": [], "prompt": "商品类别"}
+{"content": "我想让你还250元的欠款", "result_list": [], "prompt": "彩票期数"}
+{"content": "我想让你还250元的欠款", "result_list": [], "prompt": "快递公司"}
+{"content": "我想让你还250元的欠款", "result_list": [], "prompt": "数量"}
+{"content": "我想让你还250元的欠款", "result_list": [], "prompt": "时间"}
+{"content": "我想让你还250元的欠款", "result_list": [], "prompt": "注数"}
+{"content": "我想让你还250元的欠款", "result_list": [], "prompt": "等级"}
+{"content": "我想让你还250元的欠款", "result_list": [], "prompt": "类型"}
+{"content": "我想让你还250元的欠款", "result_list": [], "prompt": "终点站"}
+{"content": "我想让你还250元的欠款", "result_list": [], "prompt": "药品名称"}
+{"content": "我想让你还250元的欠款", "result_list": [], "prompt": "起始站"}
+{"content": "我想让你还250元的欠款", "result_list": [], "prompt": "金额"}
+{"content": "我想给店主发送你好的消息", "result_list": [], "prompt": "人名"}
+{"content": "我想给店主发送你好的消息", "result_list": [], "prompt": "商品参数"}
+{"content": "我想给店主发送你好的消息", "result_list": [], "prompt": "商品类别"}
+{"content": "我想给店主发送你好的消息", "result_list": [], "prompt": "彩票期数"}
+{"content": "我想给店主发送你好的消息", "result_list": [], "prompt": "快递公司"}
+{"content": "我想给店主发送你好的消息", "result_list": [], "prompt": "数量"}
+{"content": "我想给店主发送你好的消息", "result_list": [], "prompt": "时间"}
+{"content": "我想给店主发送你好的消息", "result_list": [], "prompt": "注数"}
+{"content": "我想给店主发送你好的消息", "result_list": [], "prompt": "等级"}
+{"content": "我想给店主发送你好的消息", "result_list": [], "prompt": "类型"}
+{"content": "我想给店主发送你好的消息", "result_list": [], "prompt": "终点站"}
+{"content": "我想给店主发送你好的消息", "result_list": [], "prompt": "药品名称"}
+{"content": "我想给店主发送你好的消息", "result_list": [], "prompt": "起始站"}
+{"content": "我想给店主发送你好的消息", "result_list": [], "prompt": "金额"}
+{"content": "我想将选定的长款男风衣放进购物车", "result_list": [], "prompt": "人名"}
+{"content": "我想将选定的长款男风衣放进购物车", "result_list": [], "prompt": "商品参数"}
+{"content": "我想将选定的长款男风衣放进购物车", "result_list": [], "prompt": "彩票期数"}
+{"content": "我想将选定的长款男风衣放进购物车", "result_list": [], "prompt": "快递公司"}
+{"content": "我想将选定的长款男风衣放进购物车", "result_list": [], "prompt": "数量"}
+{"content": "我想将选定的长款男风衣放进购物车", "result_list": [], "prompt": "时间"}
+{"content": "我想将选定的长款男风衣放进购物车", "result_list": [], "prompt": "注数"}
+{"content": "我想将选定的长款男风衣放进购物车", "result_list": [], "prompt": "消息内容"}
+{"content": "我想将选定的长款男风衣放进购物车", "result_list": [], "prompt": "等级"}
+{"content": "我想将选定的长款男风衣放进购物车", "result_list": [], "prompt": "类型"}
+{"content": "我想将选定的长款男风衣放进购物车", "result_list": [], "prompt": "终点站"}
+{"content": "我想将选定的长款男风衣放进购物车", "result_list": [], "prompt": "药品名称"}
+{"content": "我想将选定的长款男风衣放进购物车", "result_list": [], "prompt": "起始站"}
+{"content": "我想将选定的长款男风衣放进购物车", "result_list": [], "prompt": "金额"}
+{"content": "我想去紫荆食堂，在2022年12月23日与你一起吃饭", "result_list": [], "prompt": "人名"}
+{"content": "我想去紫荆食堂，在2022年12月23日与你一起吃饭", "result_list": [], "prompt": "商品参数"}
+{"content": "我想去紫荆食堂，在2022年12月23日与你一起吃饭", "result_list": [], "prompt": "商品类别"}
+{"content": "我想去紫荆食堂，在2022年12月23日与你一起吃饭", "result_list": [], "prompt": "彩票期数"}
+{"content": "我想去紫荆食堂，在2022年12月23日与你一起吃饭", "result_list": [], "prompt": "快递公司"}
+{"content": "我想去紫荆食堂，在2022年12月23日与你一起吃饭", "result_list": [], "prompt": "数量"}
+{"content": "我想去紫荆食堂，在2022年12月23日与你一起吃饭", "result_list": [], "prompt": "时间"}
+{"content": "我想去紫荆食堂，在2022年12月23日与你一起吃饭", "result_list": [], "prompt": "注数"}
+{"content": "我想去紫荆食堂，在2022年12月23日与你一起吃饭", "result_list": [], "prompt": "等级"}
+{"content": "我想去紫荆食堂，在2022年12月23日与你一起吃饭", "result_list": [], "prompt": "类型"}
+{"content": "我想去紫荆食堂，在2022年12月23日与你一起吃饭", "result_list": [], "prompt": "终点站"}
+{"content": "我想去紫荆食堂，在2022年12月23日与你一起吃饭", "result_list": [], "prompt": "药品名称"}
+{"content": "我想去紫荆食堂，在2022年12月23日与你一起吃饭", "result_list": [], "prompt": "起始站"}
+{"content": "我想去紫荆食堂，在2022年12月23日与你一起吃饭", "result_list": [], "prompt": "金额"}
+{"content": "我想购买2022年12月26日的两张北京到武汉的商务仓高铁票", "result_list": [], "prompt": "人名"}
+{"content": "我想购买2022年12月26日的两张北京到武汉的商务仓高铁票", "result_list": [], "prompt": "商品参数"}
+{"content": "我想购买2022年12月26日的两张北京到武汉的商务仓高铁票", "result_list": [], "prompt": "商品类别"}
+{"content": "我想购买2022年12月26日的两张北京到武汉的商务仓高铁票", "result_list": [], "prompt": "彩票期数"}
+{"content": "我想购买2022年12月26日的两张北京到武汉的商务仓高铁票", "result_list": [], "prompt": "快递公司"}
+{"content": "我想购买2022年12月26日的两张北京到武汉的商务仓高铁票", "result_list": [], "prompt": "注数"}
+{"content": "我想购买2022年12月26日的两张北京到武汉的商务仓高铁票", "result_list": [], "prompt": "消息内容"}
+{"content": "我想购买2022年12月26日的两张北京到武汉的商务仓高铁票", "result_list": [], "prompt": "类型"}
+{"content": "我想购买2022年12月26日的两张北京到武汉的商务仓高铁票", "result_list": [], "prompt": "药品名称"}
+{"content": "我想购买2022年12月26日的两张北京到武汉的商务仓高铁票", "result_list": [], "prompt": "金额"}
+{"content": "我想给余额宝充款2345元", "result_list": [], "prompt": "人名"}
+{"content": "我想给余额宝充款2345元", "result_list": [], "prompt": "商品参数"}
+{"content": "我想给余额宝充款2345元", "result_list": [], "prompt": "商品类别"}
+{"content": "我想给余额宝充款2345元", "result_list": [], "prompt": "彩票期数"}
+{"content": "我想给余额宝充款2345元", "result_list": [], "prompt": "快递公司"}
+{"content": "我想给余额宝充款2345元", "result_list": [], "prompt": "数量"}
+{"content": "我想给余额宝充款2345元", "result_list": [], "prompt": "时间"}
+{"content": "我想给余额宝充款2345元", "result_list": [], "prompt": "注数"}
+{"content": "我想给余额宝充款2345元", "result_list": [], "prompt": "消息内容"}
+{"content": "我想给余额宝充款2345元", "result_list": [], "prompt": "等级"}
+{"content": "我想给余额宝充款2345元", "result_list": [], "prompt": "类型"}
+{"content": "我想给余额宝充款2345元", "result_list": [], "prompt": "终点站"}
+{"content": "我想给余额宝充款2345元", "result_list": [], "prompt": "药品名称"}
+{"content": "我想给余额宝充款2345元", "result_list": [], "prompt": "起始站"}

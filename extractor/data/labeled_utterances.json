@@ -1,0 +1,947 @@
+[
+    {
+        "id": 0,
+        "text": "我想去紫荆食堂，在2022年12月23日与你一起吃饭",
+        "relations": [],
+        "entities": [
+            {
+                "id": 0,
+                "start_offset": 0,
+                "end_offset": 26,
+                "label": "消息内容"
+            }
+        ]
+    },
+    {
+        "id": 1,
+        "text": "我想让你还250元的欠款",
+        "relations": [],
+        "entities": [
+            {
+                "id": 1,
+                "start_offset": 0,
+                "end_offset": 12,
+                "label": "消息内容"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "text": "我想清空小明的聊天记录",
+        "relations": [],
+        "entities": [
+            {
+                "id": 2,
+                "start_offset": 4,
+                "end_offset": 6,
+                "label": "人名"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "text": "我想在通讯录中添加高中同学的分组",
+        "relations": [],
+        "entities": [
+            {
+                "id": 3,
+                "start_offset": 9,
+                "end_offset": 13,
+                "label": "组别"
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "text": "我想快速查找通讯录中高中同学的某人",
+        "relations": [],
+        "entities": [
+            {
+                "id": 3,
+                "start_offset": 10,
+                "end_offset": 14,
+                "label": "组别"
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "text": "我想在朋友圈发送我的GRE考试获得满分的信息",
+        "relations": [],
+        "entities": [
+            {
+                "id": 4,
+                "start_offset": 8,
+                "end_offset": 19,
+                "label": "消息内容"
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "text": "我想购买2022年12月25日的两张流浪地球的电影票",
+        "relations": [],
+        "entities": [
+            {
+                "id": 5,
+                "start_offset": 4,
+                "end_offset": 15,
+                "label": "时间"
+            },
+            {
+                "id": 6,
+                "start_offset": 16,
+                "end_offset": 18,
+                "label": "数量"
+            },
+            {
+                "id": 7,
+                "start_offset": 18,
+                "end_offset": 22,
+                "label": "名称"
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "text": "我想购买2022年12月26日的两张北京到武汉的商务仓高铁票",
+        "relations": [],
+        "entities": [
+            {
+                "id": 8,
+                "start_offset": 4,
+                "end_offset": 15,
+                "label": "时间"
+            },
+            {
+                "id": 6,
+                "start_offset": 16,
+                "end_offset": 18,
+                "label": "数量"
+            },
+            {
+                "id": 9,
+                "start_offset": 18,
+                "end_offset": 20,
+                "label": "起始站"
+            },
+            {
+                "id": 10,
+                "start_offset": 21,
+                "end_offset": 23,
+                "label": "终点站"
+            },
+            {
+                "id": 11,
+                "start_offset": 24,
+                "end_offset": 27,
+                "label": "等级"
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "text": "我想替小明的13603081343充话费300元",
+        "relations": [],
+        "entities": [
+            {
+                "id": 2,
+                "start_offset": 3,
+                "end_offset": 5,
+                "label": "人名"
+            },
+            {
+                "id": 12,
+                "start_offset": 6,
+                "end_offset": 17,
+                "label": "手机号"
+            },
+            {
+                "id": 13,
+                "start_offset": 20,
+                "end_offset": 24,
+                "label": "金额"
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "text": "我想给小明发200元的红包并祝贺GRE高分",
+        "relations": [],
+        "entities": [
+            {
+                "id": 2,
+                "start_offset": 3,
+                "end_offset": 5,
+                "label": "人名"
+            },
+            {
+                "id": 14,
+                "start_offset": 6,
+                "end_offset": 10,
+                "label": "金额"
+            },
+            {
+                "id": 15,
+                "start_offset": 14,
+                "end_offset": 21,
+                "label": "留言"
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "text": "我想在高中同学群发200元的红包并圣诞快乐",
+        "relations": [],
+        "entities": [
+            {
+                "id": 16,
+                "start_offset": 3,
+                "end_offset": 8,
+                "label": "群名"
+            },
+            {
+                "id": 14,
+                "start_offset": 9,
+                "end_offset": 13,
+                "label": "金额"
+            },
+            {
+                "id": 17,
+                "start_offset": 17,
+                "end_offset": 21,
+                "label": "留言"
+            }
+        ]
+    },
+    {
+        "id": 11,
+        "text": "我想与小明进行语音通话",
+        "relations": [],
+        "entities": [
+            {
+                "id": 2,
+                "start_offset": 3,
+                "end_offset": 5,
+                "label": "人名"
+            }
+        ]
+    },
+    {
+        "id": 12,
+        "text": "我想与小明进行视频通话",
+        "relations": [],
+        "entities": [
+            {
+                "id": 2,
+                "start_offset": 3,
+                "end_offset": 5,
+                "label": "人名"
+            }
+        ]
+    },
+    {
+        "id": 13,
+        "text": "我想识别小明发送的二维码",
+        "relations": [],
+        "entities": [
+            {
+                "id": 2,
+                "start_offset": 4,
+                "end_offset": 6,
+                "label": "人名"
+            }
+        ]
+    },
+    {
+        "id": 14,
+        "text": "我想添加最新通话记录的新朋友小明",
+        "relations": [],
+        "entities": [
+            {
+                "id": 2,
+                "start_offset": 14,
+                "end_offset": 16,
+                "label": "人名"
+            }
+        ]
+    },
+    {
+        "id": 15,
+        "text": "我想给小明转账1000元并祝贺新婚",
+        "relations": [],
+        "entities": [
+            {
+                "id": 2,
+                "start_offset": 3,
+                "end_offset": 5,
+                "label": "人名"
+            },
+            {
+                "id": 18,
+                "start_offset": 7,
+                "end_offset": 12,
+                "label": "金额"
+            },
+            {
+                "id": 19,
+                "start_offset": 13,
+                "end_offset": 17,
+                "label": "留言"
+            }
+        ]
+    },
+    {
+        "id": 16,
+        "text": "我想接收小明的转账1000元",
+        "relations": [],
+        "entities": [
+            {
+                "id": 2,
+                "start_offset": 4,
+                "end_offset": 6,
+                "label": "人名"
+            },
+            {
+                "id": 18,
+                "start_offset": 9,
+                "end_offset": 14,
+                "label": "金额"
+            }
+        ]
+    },
+    {
+        "id": 17,
+        "text": "我想购买2022年12月25日21点场金盾剧院的两张流浪星球的电影票",
+        "relations": [],
+        "entities": [
+            {
+                "id": 20,
+                "start_offset": 4,
+                "end_offset": 19,
+                "label": "时间"
+            },
+            {
+                "id": 21,
+                "start_offset": 19,
+                "end_offset": 23,
+                "label": "地点"
+            },
+            {
+                "id": 6,
+                "start_offset": 24,
+                "end_offset": 26,
+                "label": "数量"
+            },
+            {
+                "id": 22,
+                "start_offset": 26,
+                "end_offset": 30,
+                "label": "名称"
+            }
+        ]
+    },
+    {
+        "id": 18,
+        "text": "我想购买2022年12月26日的两张北京到武汉的商务仓高铁票",
+        "relations": [],
+        "entities": [
+            {
+                "id": 8,
+                "start_offset": 4,
+                "end_offset": 15,
+                "label": "时间"
+            },
+            {
+                "id": 6,
+                "start_offset": 16,
+                "end_offset": 18,
+                "label": "数量"
+            },
+            {
+                "id": 9,
+                "start_offset": 18,
+                "end_offset": 20,
+                "label": "起始站"
+            },
+            {
+                "id": 10,
+                "start_offset": 21,
+                "end_offset": 23,
+                "label": "终点站"
+            },
+            {
+                "id": 11,
+                "start_offset": 24,
+                "end_offset": 27,
+                "label": "等级"
+            }
+        ]
+    },
+    {
+        "id": 19,
+        "text": "我想挂2002年12月24日北医三院内分泌科的号",
+        "relations": [],
+        "entities": [
+            {
+                "id": 23,
+                "start_offset": 3,
+                "end_offset": 14,
+                "label": "时间"
+            },
+            {
+                "id": 24,
+                "start_offset": 14,
+                "end_offset": 18,
+                "label": "医院"
+            },
+            {
+                "id": 25,
+                "start_offset": 18,
+                "end_offset": 22,
+                "label": "科室"
+            }
+        ]
+    },
+    {
+        "id": 20,
+        "text": "我想为4403042087788788还款2000元",
+        "relations": [],
+        "entities": [
+            {
+                "id": 26,
+                "start_offset": 3,
+                "end_offset": 19,
+                "label": "卡号"
+            },
+            {
+                "id": 27,
+                "start_offset": 21,
+                "end_offset": 26,
+                "label": "金额"
+            }
+        ]
+    },
+    {
+        "id": 21,
+        "text": "我想看2022年5月的账目信息",
+        "relations": [],
+        "entities": [
+            {
+                "id": 28,
+                "start_offset": 3,
+                "end_offset": 10,
+                "label": "时间"
+            }
+        ]
+    },
+    {
+        "id": 22,
+        "text": "我想替小明的13603081343充话费300元",
+        "relations": [],
+        "entities": [
+            {
+                "id": 2,
+                "start_offset": 3,
+                "end_offset": 5,
+                "label": "人名"
+            },
+            {
+                "id": 12,
+                "start_offset": 6,
+                "end_offset": 17,
+                "label": "手机号"
+            },
+            {
+                "id": 13,
+                "start_offset": 20,
+                "end_offset": 24,
+                "label": "金额"
+            }
+        ]
+    },
+    {
+        "id": 23,
+        "text": "我想给余额宝充款2345元",
+        "relations": [],
+        "entities": [
+            {
+                "id": 29,
+                "start_offset": 8,
+                "end_offset": 13,
+                "label": "金额"
+            }
+        ]
+    },
+    {
+        "id": 24,
+        "text": "我想购买2022年12月第三期的双色球机选10注",
+        "relations": [],
+        "entities": [
+            {
+                "id": 30,
+                "start_offset": 4,
+                "end_offset": 15,
+                "label": "期数"
+            },
+            {
+                "id": 31,
+                "start_offset": 16,
+                "end_offset": 19,
+                "label": "类型"
+            },
+            {
+                "id": 32,
+                "start_offset": 21,
+                "end_offset": 24,
+                "label": "注数"
+            }
+        ]
+    },
+    {
+        "id": 25,
+        "text": "我想查看小明通过顺丰来的快递位置",
+        "relations": [],
+        "entities": [
+            {
+                "id": 2,
+                "start_offset": 4,
+                "end_offset": 6,
+                "label": "人名"
+            },
+            {
+                "id": 33,
+                "start_offset": 8,
+                "end_offset": 10,
+                "label": "快递公司"
+            }
+        ]
+    },
+    {
+        "id": 26,
+        "text": "我想查看卢布在2022年12月25日的对人民币汇率",
+        "relations": [],
+        "entities": [
+            {
+                "id": 34,
+                "start_offset": 4,
+                "end_offset": 6,
+                "label": "币种"
+            },
+            {
+                "id": 5,
+                "start_offset": 7,
+                "end_offset": 18,
+                "label": "时间"
+            }
+        ]
+    },
+    {
+        "id": 27,
+        "text": "我想通过饿了么点2份牛肉盖浇饭",
+        "relations": [],
+        "entities": [
+            {
+                "id": 35,
+                "start_offset": 4,
+                "end_offset": 7,
+                "label": "平台"
+            },
+            {
+                "id": 36,
+                "start_offset": 8,
+                "end_offset": 10,
+                "label": "份数"
+            },
+            {
+                "id": 37,
+                "start_offset": 10,
+                "end_offset": 15,
+                "label": "餐品"
+            }
+        ]
+    },
+    {
+        "id": 28,
+        "text": "我想给店主发送你好的消息",
+        "relations": [],
+        "entities": [
+            {
+                "id": 38,
+                "start_offset": 7,
+                "end_offset": 9,
+                "label": "消息内容"
+            }
+        ]
+    },
+    {
+        "id": 29,
+        "text": "我想查询长款男风衣的价格",
+        "relations": [],
+        "entities": [
+            {
+                "id": 39,
+                "start_offset": 4,
+                "end_offset": 9,
+                "label": "商品类别"
+            },
+            {
+                "id": 40,
+                "start_offset": 10,
+                "end_offset": 12,
+                "label": "商品参数"
+            }
+        ]
+    },
+    {
+        "id": 30,
+        "text": "我想将选定的长款男风衣放进购物车",
+        "relations": [],
+        "entities": [
+            {
+                "id": 39,
+                "start_offset": 6,
+                "end_offset": 11,
+                "label": "商品类别"
+            }
+        ]
+    },
+    {
+        "id": 31,
+        "text": "我想将已经选入购物车的长款男风衣清出去",
+        "relations": [],
+        "entities": [
+            {
+                "id": 39,
+                "start_offset": 11,
+                "end_offset": 16,
+                "label": "商品类别"
+            }
+        ]
+    },
+    {
+        "id": 32,
+        "text": "我想查询已订购长款男风衣的发货信息",
+        "relations": [],
+        "entities": [
+            {
+                "id": 39,
+                "start_offset": 7,
+                "end_offset": 12,
+                "label": "商品类别"
+            }
+        ]
+    },
+    {
+        "id": 33,
+        "text": "我想对已收到的长款男风衣给与差评",
+        "relations": [],
+        "entities": [
+            {
+                "id": 39,
+                "start_offset": 7,
+                "end_offset": 12,
+                "label": "商品类别"
+            },
+            {
+                "id": 41,
+                "start_offset": 14,
+                "end_offset": 16,
+                "label": "评价"
+            }
+        ]
+    },
+    {
+        "id": 34,
+        "text": "我想以颜色错误对长款男风衣给与投诉",
+        "relations": [],
+        "entities": [
+            {
+                "id": 42,
+                "start_offset": 3,
+                "end_offset": 7,
+                "label": "理由"
+            },
+            {
+                "id": 39,
+                "start_offset": 8,
+                "end_offset": 13,
+                "label": "商品类别"
+            }
+        ]
+    },
+    {
+        "id": 35,
+        "text": "我想以有污迹对长款男风衣退货",
+        "relations": [],
+        "entities": [
+            {
+                "id": 43,
+                "start_offset": 3,
+                "end_offset": 6,
+                "label": "理由"
+            },
+            {
+                "id": 39,
+                "start_offset": 7,
+                "end_offset": 12,
+                "label": "商品类别"
+            }
+        ]
+    },
+    {
+        "id": 36,
+        "text": "我想通过闲置换钱将九成新的加湿器出售",
+        "relations": [],
+        "entities": [
+            {
+                "id": 44,
+                "start_offset": 9,
+                "end_offset": 12,
+                "label": "新旧"
+            },
+            {
+                "id": 45,
+                "start_offset": 13,
+                "end_offset": 16,
+                "label": "商品类别"
+            }
+        ]
+    },
+    {
+        "id": 37,
+        "text": "我想对店铺1的家电类的新到货信息给与关注",
+        "relations": [],
+        "entities": [
+            {
+                "id": 46,
+                "start_offset": 3,
+                "end_offset": 6,
+                "label": "店铺名称"
+            },
+            {
+                "id": 47,
+                "start_offset": 7,
+                "end_offset": 10,
+                "label": "商品类别"
+            }
+        ]
+    },
+    {
+        "id": 38,
+        "text": "我想通过飞猪旅行安排慕田峪长城一日游",
+        "relations": [],
+        "entities": [
+            {
+                "id": 48,
+                "start_offset": 10,
+                "end_offset": 18,
+                "label": "旅游线路"
+            }
+        ]
+    },
+    {
+        "id": 39,
+        "text": "我想通过天猫超市购买加湿器一台",
+        "relations": [],
+        "entities": [
+            {
+                "id": 45,
+                "start_offset": 10,
+                "end_offset": 13,
+                "label": "商品名称"
+            }
+        ]
+    },
+    {
+        "id": 40,
+        "text": "我想查询微波炉的价格",
+        "relations": [],
+        "entities": [
+            {
+                "id": 49,
+                "start_offset": 4,
+                "end_offset": 7,
+                "label": "商品类别"
+            },
+            {
+                "id": 40,
+                "start_offset": 8,
+                "end_offset": 10,
+                "label": "商品参数"
+            }
+        ]
+    },
+    {
+        "id": 41,
+        "text": "我想查询已订购微波炉的发货信息",
+        "relations": [],
+        "entities": [
+            {
+                "id": 49,
+                "start_offset": 7,
+                "end_offset": 10,
+                "label": "商品类别"
+            }
+        ]
+    },
+    {
+        "id": 42,
+        "text": "我想对已收到的微波炉给与差评",
+        "relations": [],
+        "entities": [
+            {
+                "id": 49,
+                "start_offset": 7,
+                "end_offset": 10,
+                "label": "商品类别"
+            },
+            {
+                "id": 41,
+                "start_offset": 12,
+                "end_offset": 14,
+                "label": "评价"
+            }
+        ]
+    },
+    {
+        "id": 43,
+        "text": "我想以缺配件对微波炉退货",
+        "relations": [],
+        "entities": [
+            {
+                "id": 50,
+                "start_offset": 3,
+                "end_offset": 6,
+                "label": "理由"
+            },
+            {
+                "id": 49,
+                "start_offset": 7,
+                "end_offset": 10,
+                "label": "商品类别"
+            }
+        ]
+    },
+    {
+        "id": 44,
+        "text": "我想让京东回收我的旧微波炉",
+        "relations": [],
+        "entities": [
+            {
+                "id": 49,
+                "start_offset": 10,
+                "end_offset": 13,
+                "label": "商品类别"
+            }
+        ]
+    },
+    {
+        "id": 45,
+        "text": "我想通过京东看病咨询皮肤红肿",
+        "relations": [],
+        "entities": [
+            {
+                "id": 51,
+                "start_offset": 10,
+                "end_offset": 14,
+                "label": "病情分类"
+            }
+        ]
+    },
+    {
+        "id": 46,
+        "text": "我想通过京东买药购买消毒酒精",
+        "relations": [],
+        "entities": [
+            {
+                "id": 52,
+                "start_offset": 10,
+                "end_offset": 14,
+                "label": "药品名称"
+            }
+        ]
+    },
+    {
+        "id": 47,
+        "text": "我想替小明的13603081343充话费300元",
+        "relations": [],
+        "entities": [
+            {
+                "id": 2,
+                "start_offset": 3,
+                "end_offset": 5,
+                "label": "人名"
+            },
+            {
+                "id": 12,
+                "start_offset": 6,
+                "end_offset": 17,
+                "label": "手机号"
+            },
+            {
+                "id": 13,
+                "start_offset": 20,
+                "end_offset": 24,
+                "label": "金额"
+            }
+        ]
+    },
+    {
+        "id": 48,
+        "text": "我想购买2022年12月第三期的双色球机选10注",
+        "relations": [],
+        "entities": [
+            {
+                "id": 53,
+                "start_offset": 4,
+                "end_offset": 12,
+                "label": "时间"
+            },
+            {
+                "id": 54,
+                "start_offset": 12,
+                "end_offset": 15,
+                "label": "彩票期数"
+            },
+            {
+                "id": 31,
+                "start_offset": 16,
+                "end_offset": 19,
+                "label": "类型"
+            },
+            {
+                "id": 32,
+                "start_offset": 21,
+                "end_offset": 24,
+                "label": "注数"
+            }
+        ]
+    },
+    {
+        "id": 49,
+        "text": "我想让京东维修我的空调",
+        "relations": [],
+        "entities": [
+            {
+                "id": 55,
+                "start_offset": 9,
+                "end_offset": 11,
+                "label": "商品类别"
+            }
+        ]
+    },
+    {
+        "id": 50,
+        "text": "我想让京东养车对我的现代车进行保养",
+        "relations": [],
+        "entities": [
+            {
+                "id": 56,
+                "start_offset": 10,
+                "end_offset": 12,
+                "label": "汽车品牌"
+            }
+        ]
+    }
+]
