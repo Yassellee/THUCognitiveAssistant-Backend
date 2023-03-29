@@ -1,0 +1,798 @@
+[
+    {
+        "text": "我想去紫荆食堂，在2022年12月23日与你一起吃饭",
+        "intentName": "微信发送消息",
+        "entityLabels": [
+            {
+                "startCharIndex": 0,
+                "endCharIndex": 25,
+                "entityName": "消息内容"
+            }
+        ]
+    },
+    {
+        "text": "我想让你还250元的欠款",
+        "intentName": "微信发送消息",
+        "entityLabels": [
+            {
+                "startCharIndex": 0,
+                "endCharIndex": 11,
+                "entityName": "消息内容"
+            }
+        ]
+    },
+    {
+        "text": "我想清空小明的聊天记录",
+        "intentName": "清空微信记录",
+        "entityLabels": [
+            {
+                "startCharIndex": 4,
+                "endCharIndex": 5,
+                "entityName": "人名"
+            }
+        ]
+    },
+    {
+        "text": "我想在通讯录中添加高中同学的分组",
+        "intentName": "微信添加分组",
+        "entityLabels": [
+            {
+                "startCharIndex": 9,
+                "endCharIndex": 12,
+                "entityName": "组别"
+            }
+        ]
+    },
+    {
+        "text": "我想快速查找通讯录中高中同学的某人",
+        "intentName": "查找人员",
+        "entityLabels": [
+            {
+                "startCharIndex": 10,
+                "endCharIndex": 13,
+                "entityName": "组别"
+            }
+        ]
+    },
+    {
+        "text": "我想在朋友圈发送我的GRE考试获得满分的信息",
+        "intentName": "微信朋友圈发信息",
+        "entityLabels": [
+            {
+                "startCharIndex": 8,
+                "endCharIndex": 18,
+                "entityName": "消息内容"
+            }
+        ]
+    },
+    {
+        "text": "我想购买2022年12月25日的两张流浪地球的电影票",
+        "intentName": "微信购买电影票",
+        "entityLabels": [
+            {
+                "startCharIndex": 4,
+                "endCharIndex": 14,
+                "entityName": "时间"
+            },
+            {
+                "startCharIndex": 16,
+                "endCharIndex": 17,
+                "entityName": "数量"
+            },
+            {
+                "startCharIndex": 18,
+                "endCharIndex": 21,
+                "entityName": "名称"
+            }
+        ]
+    },
+    {
+        "text": "我想购买2022年12月26日的两张北京到武汉的商务仓高铁票",
+        "intentName": "微信购买高铁票",
+        "entityLabels": [
+            {
+                "startCharIndex": 4,
+                "endCharIndex": 14,
+                "entityName": "时间"
+            },
+            {
+                "startCharIndex": 16,
+                "endCharIndex": 17,
+                "entityName": "数量"
+            },
+            {
+                "startCharIndex": 18,
+                "endCharIndex": 19,
+                "entityName": "起始站"
+            },
+            {
+                "startCharIndex": 21,
+                "endCharIndex": 22,
+                "entityName": "终点站"
+            },
+            {
+                "startCharIndex": 24,
+                "endCharIndex": 26,
+                "entityName": "等级"
+            }
+        ]
+    },
+    {
+        "text": "我想替小明的13603081343充话费300元",
+        "intentName": "微信充话费",
+        "entityLabels": [
+            {
+                "startCharIndex": 3,
+                "endCharIndex": 4,
+                "entityName": "人名"
+            },
+            {
+                "startCharIndex": 6,
+                "endCharIndex": 16,
+                "entityName": "手机号"
+            },
+            {
+                "startCharIndex": 20,
+                "endCharIndex": 23,
+                "entityName": "金额"
+            }
+        ]
+    },
+    {
+        "text": "我想给小明发200元的红包并祝贺GRE高分",
+        "intentName": "微信红包",
+        "entityLabels": [
+            {
+                "startCharIndex": 3,
+                "endCharIndex": 4,
+                "entityName": "人名"
+            },
+            {
+                "startCharIndex": 6,
+                "endCharIndex": 9,
+                "entityName": "金额"
+            },
+            {
+                "startCharIndex": 14,
+                "endCharIndex": 20,
+                "entityName": "留言"
+            }
+        ]
+    },
+    {
+        "text": "我想在高中同学群发200元的红包并圣诞快乐",
+        "intentName": "微信群发红包",
+        "entityLabels": [
+            {
+                "startCharIndex": 3,
+                "endCharIndex": 7,
+                "entityName": "群名"
+            },
+            {
+                "startCharIndex": 9,
+                "endCharIndex": 12,
+                "entityName": "金额"
+            },
+            {
+                "startCharIndex": 17,
+                "endCharIndex": 20,
+                "entityName": "留言"
+            }
+        ]
+    },
+    {
+        "text": "我想与小明进行语音通话",
+        "intentName": "微信语音通话",
+        "entityLabels": [
+            {
+                "startCharIndex": 3,
+                "endCharIndex": 4,
+                "entityName": "人名"
+            }
+        ]
+    },
+    {
+        "text": "我想与小明进行视频通话",
+        "intentName": "微信视频通话",
+        "entityLabels": [
+            {
+                "startCharIndex": 3,
+                "endCharIndex": 4,
+                "entityName": "人名"
+            }
+        ]
+    },
+    {
+        "text": "我想识别小明发送的二维码",
+        "intentName": "微信识别二维码",
+        "entityLabels": [
+            {
+                "startCharIndex": 4,
+                "endCharIndex": 5,
+                "entityName": "人名"
+            }
+        ]
+    },
+    {
+        "text": "我想添加最新通话记录的新朋友小明",
+        "intentName": "微信添加朋友",
+        "entityLabels": [
+            {
+                "startCharIndex": 14,
+                "endCharIndex": 15,
+                "entityName": "人名"
+            }
+        ]
+    },
+    {
+        "text": "我想给小明转账1000元并祝贺新婚",
+        "intentName": "支付宝转账",
+        "entityLabels": [
+            {
+                "startCharIndex": 3,
+                "endCharIndex": 4,
+                "entityName": "人名"
+            },
+            {
+                "startCharIndex": 7,
+                "endCharIndex": 11,
+                "entityName": "金额"
+            },
+            {
+                "startCharIndex": 13,
+                "endCharIndex": 16,
+                "entityName": "留言"
+            }
+        ]
+    },
+    {
+        "text": "我想接收小明的转账1000元",
+        "intentName": "支付宝收款",
+        "entityLabels": [
+            {
+                "startCharIndex": 4,
+                "endCharIndex": 5,
+                "entityName": "人名"
+            },
+            {
+                "startCharIndex": 9,
+                "endCharIndex": 13,
+                "entityName": "金额"
+            }
+        ]
+    },
+    {
+        "text": "我想购买2022年12月25日21点场金盾剧院的两张流浪星球的电影票",
+        "intentName": "支付宝购买电影票",
+        "entityLabels": [
+            {
+                "startCharIndex": 4,
+                "endCharIndex": 18,
+                "entityName": "时间"
+            },
+            {
+                "startCharIndex": 19,
+                "endCharIndex": 22,
+                "entityName": "地点"
+            },
+            {
+                "startCharIndex": 24,
+                "endCharIndex": 25,
+                "entityName": "数量"
+            },
+            {
+                "startCharIndex": 26,
+                "endCharIndex": 29,
+                "entityName": "名称"
+            }
+        ]
+    },
+    {
+        "text": "我想购买2022年12月26日的两张北京到武汉的商务仓高铁票",
+        "intentName": "支付宝购买高铁票",
+        "entityLabels": [
+            {
+                "startCharIndex": 4,
+                "endCharIndex": 14,
+                "entityName": "时间"
+            },
+            {
+                "startCharIndex": 16,
+                "endCharIndex": 17,
+                "entityName": "数量"
+            },
+            {
+                "startCharIndex": 18,
+                "endCharIndex": 19,
+                "entityName": "起始站"
+            },
+            {
+                "startCharIndex": 21,
+                "endCharIndex": 22,
+                "entityName": "终点站"
+            },
+            {
+                "startCharIndex": 24,
+                "endCharIndex": 26,
+                "entityName": "等级"
+            }
+        ]
+    },
+    {
+        "text": "我想挂2002年12月24日北医三院内分泌科的号",
+        "intentName": "支付宝挂号",
+        "entityLabels": [
+            {
+                "startCharIndex": 3,
+                "endCharIndex": 13,
+                "entityName": "时间"
+            },
+            {
+                "startCharIndex": 14,
+                "endCharIndex": 17,
+                "entityName": "医院"
+            },
+            {
+                "startCharIndex": 18,
+                "endCharIndex": 21,
+                "entityName": "科室"
+            }
+        ]
+    },
+    {
+        "text": "我想为4403042087788788还款2000元",
+        "intentName": "支付宝还款",
+        "entityLabels": [
+            {
+                "startCharIndex": 3,
+                "endCharIndex": 18,
+                "entityName": "卡号"
+            },
+            {
+                "startCharIndex": 21,
+                "endCharIndex": 25,
+                "entityName": "金额"
+            }
+        ]
+    },
+    {
+        "text": "我想看2022年5月的账目信息",
+        "intentName": "查看支付宝账目",
+        "entityLabels": [
+            {
+                "startCharIndex": 3,
+                "endCharIndex": 9,
+                "entityName": "时间"
+            }
+        ]
+    },
+    {
+        "text": "我想替小明的13603081343充话费300元",
+        "intentName": "支付宝充话费",
+        "entityLabels": [
+            {
+                "startCharIndex": 3,
+                "endCharIndex": 4,
+                "entityName": "人名"
+            },
+            {
+                "startCharIndex": 6,
+                "endCharIndex": 16,
+                "entityName": "手机号"
+            },
+            {
+                "startCharIndex": 20,
+                "endCharIndex": 23,
+                "entityName": "金额"
+            }
+        ]
+    },
+    {
+        "text": "我想给余额宝充款2345元",
+        "intentName": "余额宝充款",
+        "entityLabels": [
+            {
+                "startCharIndex": 8,
+                "endCharIndex": 12,
+                "entityName": "金额"
+            }
+        ]
+    },
+    {
+        "text": "我想购买2022年12月第三期的双色球机选10注",
+        "intentName": "支付宝买彩票",
+        "entityLabels": [
+            {
+                "startCharIndex": 4,
+                "endCharIndex": 14,
+                "entityName": "期数"
+            },
+            {
+                "startCharIndex": 16,
+                "endCharIndex": 18,
+                "entityName": "类型"
+            },
+            {
+                "startCharIndex": 21,
+                "endCharIndex": 23,
+                "entityName": "注数"
+            }
+        ]
+    },
+    {
+        "text": "我想查看小明通过顺丰来的快递位置",
+        "intentName": "支付宝查快递",
+        "entityLabels": [
+            {
+                "startCharIndex": 4,
+                "endCharIndex": 5,
+                "entityName": "人名"
+            },
+            {
+                "startCharIndex": 8,
+                "endCharIndex": 9,
+                "entityName": "快递公司"
+            }
+        ]
+    },
+    {
+        "text": "我想查看卢布在2022年12月25日的对人民币汇率",
+        "intentName": "支付宝查汇率",
+        "entityLabels": [
+            {
+                "startCharIndex": 4,
+                "endCharIndex": 5,
+                "entityName": "币种"
+            },
+            {
+                "startCharIndex": 7,
+                "endCharIndex": 17,
+                "entityName": "时间"
+            }
+        ]
+    },
+    {
+        "text": "我想通过饿了么点2份牛肉盖浇饭",
+        "intentName": "支付宝订外卖",
+        "entityLabels": [
+            {
+                "startCharIndex": 4,
+                "endCharIndex": 6,
+                "entityName": "平台"
+            },
+            {
+                "startCharIndex": 8,
+                "endCharIndex": 9,
+                "entityName": "份数"
+            },
+            {
+                "startCharIndex": 10,
+                "endCharIndex": 14,
+                "entityName": "餐品"
+            }
+        ]
+    },
+    {
+        "text": "我想给店主发送你好的消息",
+        "intentName": "淘宝发信息",
+        "entityLabels": [
+            {
+                "startCharIndex": 7,
+                "endCharIndex": 8,
+                "entityName": "消息内容"
+            }
+        ]
+    },
+    {
+        "text": "我想查询长款男风衣的价格",
+        "intentName": "淘宝查货",
+        "entityLabels": [
+            {
+                "startCharIndex": 4,
+                "endCharIndex": 8,
+                "entityName": "商品类别"
+            },
+            {
+                "startCharIndex": 10,
+                "endCharIndex": 11,
+                "entityName": "商品参数"
+            }
+        ]
+    },
+    {
+        "text": "我想将选定的长款男风衣放进购物车",
+        "intentName": "淘宝下单",
+        "entityLabels": [
+            {
+                "startCharIndex": 6,
+                "endCharIndex": 10,
+                "entityName": "商品类别"
+            }
+        ]
+    },
+    {
+        "text": "我想将已经选入购物车的长款男风衣清出去",
+        "intentName": "清出购物车",
+        "entityLabels": [
+            {
+                "startCharIndex": 11,
+                "endCharIndex": 15,
+                "entityName": "商品类别"
+            }
+        ]
+    },
+    {
+        "text": "我想查询已订购长款男风衣的发货信息",
+        "intentName": "查询淘宝发货信息",
+        "entityLabels": [
+            {
+                "startCharIndex": 7,
+                "endCharIndex": 11,
+                "entityName": "商品类别"
+            }
+        ]
+    },
+    {
+        "text": "我想对已收到的长款男风衣给与差评",
+        "intentName": "淘宝购物评价",
+        "entityLabels": [
+            {
+                "startCharIndex": 7,
+                "endCharIndex": 11,
+                "entityName": "商品类别"
+            },
+            {
+                "startCharIndex": 14,
+                "endCharIndex": 15,
+                "entityName": "评价"
+            }
+        ]
+    },
+    {
+        "text": "我想以颜色错误对长款男风衣给与投诉",
+        "intentName": "淘宝购物投诉",
+        "entityLabels": [
+            {
+                "startCharIndex": 3,
+                "endCharIndex": 6,
+                "entityName": "理由"
+            },
+            {
+                "startCharIndex": 8,
+                "endCharIndex": 12,
+                "entityName": "商品类别"
+            }
+        ]
+    },
+    {
+        "text": "我想以有污迹对长款男风衣退货",
+        "intentName": "淘宝退货",
+        "entityLabels": [
+            {
+                "startCharIndex": 3,
+                "endCharIndex": 5,
+                "entityName": "理由"
+            },
+            {
+                "startCharIndex": 7,
+                "endCharIndex": 11,
+                "entityName": "商品类别"
+            }
+        ]
+    },
+    {
+        "text": "我想通过闲置换钱将九成新的加湿器出售",
+        "intentName": "闲置换钱",
+        "entityLabels": [
+            {
+                "startCharIndex": 9,
+                "endCharIndex": 11,
+                "entityName": "新旧"
+            },
+            {
+                "startCharIndex": 13,
+                "endCharIndex": 15,
+                "entityName": "商品类别"
+            }
+        ]
+    },
+    {
+        "text": "我想对店铺1的家电类的新到货信息给与关注",
+        "intentName": "关注店铺",
+        "entityLabels": [
+            {
+                "startCharIndex": 3,
+                "endCharIndex": 5,
+                "entityName": "店铺名称"
+            },
+            {
+                "startCharIndex": 7,
+                "endCharIndex": 9,
+                "entityName": "商品类别"
+            }
+        ]
+    },
+    {
+        "text": "我想通过飞猪旅行安排慕田峪长城一日游",
+        "intentName": "飞猪旅行",
+        "entityLabels": [
+            {
+                "startCharIndex": 10,
+                "endCharIndex": 17,
+                "entityName": "旅游线路"
+            }
+        ]
+    },
+    {
+        "text": "我想通过天猫超市购买加湿器一台",
+        "intentName": "天猫超市购物",
+        "entityLabels": [
+            {
+                "startCharIndex": 10,
+                "endCharIndex": 12,
+                "entityName": "商品名称"
+            }
+        ]
+    },
+    {
+        "text": "我想查询微波炉的价格",
+        "intentName": "京东查货",
+        "entityLabels": [
+            {
+                "startCharIndex": 4,
+                "endCharIndex": 6,
+                "entityName": "商品类别"
+            },
+            {
+                "startCharIndex": 8,
+                "endCharIndex": 9,
+                "entityName": "商品参数"
+            }
+        ]
+    },
+    {
+        "text": "我想查询已订购微波炉的发货信息",
+        "intentName": "查询京东发货信息",
+        "entityLabels": [
+            {
+                "startCharIndex": 7,
+                "endCharIndex": 9,
+                "entityName": "商品类别"
+            }
+        ]
+    },
+    {
+        "text": "我想对已收到的微波炉给与差评",
+        "intentName": "京东购物评价",
+        "entityLabels": [
+            {
+                "startCharIndex": 7,
+                "endCharIndex": 9,
+                "entityName": "商品类别"
+            },
+            {
+                "startCharIndex": 12,
+                "endCharIndex": 13,
+                "entityName": "评价"
+            }
+        ]
+    },
+    {
+        "text": "我想以缺配件对微波炉退货",
+        "intentName": "京东退货",
+        "entityLabels": [
+            {
+                "startCharIndex": 3,
+                "endCharIndex": 5,
+                "entityName": "理由"
+            },
+            {
+                "startCharIndex": 7,
+                "endCharIndex": 9,
+                "entityName": "商品类别"
+            }
+        ]
+    },
+    {
+        "text": "我想让京东回收我的旧微波炉",
+        "intentName": "京东回收",
+        "entityLabels": [
+            {
+                "startCharIndex": 10,
+                "endCharIndex": 12,
+                "entityName": "商品类别"
+            }
+        ]
+    },
+    {
+        "text": "我想通过京东看病咨询皮肤红肿",
+        "intentName": "京东看病",
+        "entityLabels": [
+            {
+                "startCharIndex": 10,
+                "endCharIndex": 13,
+                "entityName": "病情分类"
+            }
+        ]
+    },
+    {
+        "text": "我想通过京东买药购买消毒酒精",
+        "intentName": "京东买药",
+        "entityLabels": [
+            {
+                "startCharIndex": 10,
+                "endCharIndex": 13,
+                "entityName": "药品名称"
+            }
+        ]
+    },
+    {
+        "text": "我想替小明的13603081343充话费300元",
+        "intentName": "京东充话费",
+        "entityLabels": [
+            {
+                "startCharIndex": 3,
+                "endCharIndex": 4,
+                "entityName": "人名"
+            },
+            {
+                "startCharIndex": 6,
+                "endCharIndex": 16,
+                "entityName": "手机号"
+            },
+            {
+                "startCharIndex": 20,
+                "endCharIndex": 23,
+                "entityName": "金额"
+            }
+        ]
+    },
+    {
+        "text": "我想购买2022年12月第三期的双色球机选10注",
+        "intentName": "京东买彩票",
+        "entityLabels": [
+            {
+                "startCharIndex": 4,
+                "endCharIndex": 11,
+                "entityName": "时间"
+            },
+            {
+                "startCharIndex": 12,
+                "endCharIndex": 14,
+                "entityName": "彩票期数"
+            },
+            {
+                "startCharIndex": 16,
+                "endCharIndex": 18,
+                "entityName": "类型"
+            },
+            {
+                "startCharIndex": 21,
+                "endCharIndex": 23,
+                "entityName": "注数"
+            }
+        ]
+    },
+    {
+        "text": "我想让京东维修我的空调",
+        "intentName": "京东维修",
+        "entityLabels": [
+            {
+                "startCharIndex": 9,
+                "endCharIndex": 10,
+                "entityName": "商品类别"
+            }
+        ]
+    },
+    {
+        "text": "我想让京东养车对我的现代车进行保养",
+        "intentName": "京东养车",
+        "entityLabels": [
+            {
+                "startCharIndex": 10,
+                "endCharIndex": 11,
+                "entityName": "汽车品牌"
+            }
+        ]
+    }
+]

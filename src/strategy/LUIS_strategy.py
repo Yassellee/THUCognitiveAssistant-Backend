@@ -37,17 +37,18 @@ class LUIS(BASE):
         Returns:
             dict: a dict in the following format
             {
-            "top_intent": <name of the intent that has the highest confidence score>,
-            "intents": [
-                {
-                    "intent": <name of the intent>,
-                    "score": <confidence score>
-                },
-                {
-                    "intent": <name of the intent>,
-                    "score": <confidence score>
-                }
-            ]
+                "top_intent": <name of the intent that has the highest confidence score>,
+                "intents": [
+                    {
+                        "intent": <name of the intent>,
+                        "score": <confidence score>
+                    },
+                    {
+                        "intent": <name of the intent>,
+                        "score": <confidence score>
+                    }
+                ]
+            }
         """
         
 

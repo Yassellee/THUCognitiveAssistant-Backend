@@ -102,19 +102,19 @@ def digest_intent_dict(intent_dict):
     """
     intent2entity = {}
     labeled_utterances = []
+    luis_labeled_utterances = []
     entity2feature = {}
     entity_list = []
+    entity_to_id = {}
+    classifier_data = []
+
+    cnt = 0
 
     for intent in intent_dict:
         first_sentence = intent_dict[intent][0]
         entity_with_content = re.compile(r"<.*?>").findall(first_sentence)
         for i in range(len(entity_with_content)):
             entity_with_content[i] = entity_with_content[i].strip("<").strip(">")
-        # entity_with_content_list = re.split("<|>", first_sentence)
-        # entity_with_content = []
-        # for i in range(len(entity_with_content_list)):
-        #     if i%2 == 1:
-        #         entity_with_content.append(entity_with_content_list[i])
         for entity in entity_with_content:
             current_entity = entity.split('=')[0]
             entity_list.append(current_entity)
@@ -124,6 +124,42 @@ def digest_intent_dict(intent_dict):
             if '/' in entity:
                 current_feature = entity.split('=')[1].split('|')[1].split('/')
                 entity2feature[current_entity] = current_feature
+
+        for sentence in intent_dict[intent]:
+            local_entity_with_content = re.compile(r"<.*?>").findall(sentence)
+            for i in range(len(local_entity_with_content)):
+                local_entity_with_content[i] = local_entity_with_content[i].strip("<").strip(">")
+            for entity in local_entity_with_content:
+                current_content = re.split(r"[=, |]", entity)[1]
+                sentence = sentence.replace("<"+entity+">", current_content)
+                if entity_to_id.get(current_content) is None:
+                    entity_to_id[current_content] = len(entity_to_id)
+            current_labeled_utterance = {
+                "id" : cnt,
+                "text": sentence,
+                "relations": [],
+                "entities": []
+            }
+            current_classifier_data = {
+                "text": sentence,
+                "label": intent
+            }
+            cnt += 1
+            for entity in local_entity_with_content:
+                current_entity = entity.split('=')[0]
+                current_content = re.split(r"[=, |]", entity)[1]
+                current_start_index = sentence.index(current_content)
+                current_end_index = current_start_index + len(current_content)
+                current_labeled_utterance["entities"].append(
+                    {
+                        "id": entity_to_id[current_content],
+                        "start_offset": current_start_index,
+                        "end_offset": current_end_index,
+                        "label": current_entity
+                    }
+                )
+            labeled_utterances.append(current_labeled_utterance)
+            classifier_data.append(current_classifier_data)
 
         for sentence in intent_dict[intent]:
             local_entity_with_content = re.compile(r"<.*?>").findall(sentence)
@@ -149,15 +185,17 @@ def digest_intent_dict(intent_dict):
                         "entityName": current_entity
                     }
                 )
-            labeled_utterances.append(current_labeled_utterance)
+            luis_labeled_utterances.append(current_labeled_utterance)
 
-    return intent2entity, labeled_utterances, entity2feature, entity_list
+    entity_list = list(set(entity_list))
+
+    return intent2entity, labeled_utterances, entity2feature, entity_list, classifier_data, luis_labeled_utterances
 
 
 def main():
     lines = digest_file(input_file_path)
     intent_dict = digest_intent(lines)
-    intent2entity, labeled_utterances, entity2feature, entity_list = digest_intent_dict(intent_dict)
+    intent2entity, labeled_utterances, entity2feature, entity_list, classifier_data, luis_labeled_utterances = digest_intent_dict(intent_dict)
 
     with codecs.open("..\\..\\data\\intent2entity.json", 'w', 'utf-8') as f:
         json.dump(intent2entity, f, ensure_ascii=False, indent=4)
@@ -167,13 +205,17 @@ def main():
         json.dump(entity2feature, f, ensure_ascii=False, indent=4)
     with codecs.open("..\\..\\data\\entity_list.json", 'w', 'utf-8') as f: 
         json.dump(entity_list, f, ensure_ascii=False, indent=4)
-    print(intent2entity)
-    print('\n')
-    print(labeled_utterances)
-    print('\n')
-    print(entity2feature)
-    print('\n')
-    print(entity_list)
+    with codecs.open("..\\..\\data\\train.txt", 'w', 'utf-8') as f:
+        for line in classifier_data:
+            f.write(line["text"]+"\t"+line["label"]+"\n")
+    with codecs.open("..\\..\\data\\dev.txt", 'w', 'utf-8') as f:
+        for line in classifier_data:
+            f.write(line["text"]+"\t"+line["label"]+"\n")
+    with codecs.open("..\\..\\data\\label.txt", 'w', 'utf-8') as f:
+        for intent in intent2entity:
+            f.write(intent+"\n")
+    with codecs.open("..\\..\\data\\luis_labeled_utterances.json", 'w', 'utf-8') as f:
+        json.dump(luis_labeled_utterances, f, ensure_ascii=False, indent=4)
 
 
 if __name__ == "__main__":
